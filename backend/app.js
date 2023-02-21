@@ -5,6 +5,7 @@ const cookieParser = require('cookie-parser');
 const passport = require('passport');
 const loginRouter = require('./routes/login');
 const oauthRouter = require('./routes/oauth');
+const userRouter = require('./routes/user');
 const passportConfig = require('./passport/index');
 
 const app = express();
@@ -37,6 +38,7 @@ app.use(passport.session());
 
 app.use('/login', loginRouter);
 app.use('/oauth', oauthRouter);
+app.use('/user', userRouter);
 
 app.listen(3100, () => {
   console.log('App is running');

@@ -16,6 +16,7 @@ router.get('/kakao', (req, res, next) => {
 
     const { provider, id } = info;
 
+    // 회원가입용 세션 셍성
     req.session.newUser = {
       provider,
       snsId: id,
@@ -24,7 +25,7 @@ router.get('/kakao', (req, res, next) => {
     };
 
     return req.session.save(() => {
-      res.redirect('http://localhost:3000/signup');
+      res.redirect('http://localhost:3000/user/signup');
     });
   })(req, res, next);
 });
