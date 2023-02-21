@@ -8,13 +8,23 @@ export const globalStyle = css`
   footer,
   div,
   h1,
+  h2,
   button {
     margin: unset;
     padding: unset;
   }
+
+  h1,
+  h2 {
+    font-weight: normal;
+  }
+
+  :root {
+    --light-grey: #eee;
+  }
 `;
 
-export const contentStyle = css`
+export const layoutStyle = css`
   position: relative;
   max-width: 1280px;
   margin: 0 auto;

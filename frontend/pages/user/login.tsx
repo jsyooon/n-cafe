@@ -1,7 +1,3 @@
-'use client';
-
-import axios from 'axios';
-
 export default function Login() {
   const authTypes = ['kakao'] as const;
 
