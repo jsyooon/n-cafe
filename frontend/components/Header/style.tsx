@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 
 export const headerStyle = css`
-  height: 60px;
+  height: var(--header-height);
   position: sticky;
   top: 0;
   display: flex;
