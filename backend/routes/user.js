@@ -11,7 +11,7 @@ router.get('/signup', (req, res, next) => {
   }
   req.session.destroy(() => {
     res.clearCookie('newUser');
-    return res.status(200).json(null);
+    return res.status(401).json(null);
   });
 });
 
