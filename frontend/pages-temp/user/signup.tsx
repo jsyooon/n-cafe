@@ -1,6 +1,6 @@
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import { getSignupUser } from '@/apis/user';
-import ProfileImage from '@/components/ProfileImage/index';
+import ProfileImage from 'app/ProfileImage/index';
 import type { UserType } from '@/types/user';
 
 export const SignUp = ({ user }: InferGetServerSidePropsType<typeof getServerSideProps>) => {

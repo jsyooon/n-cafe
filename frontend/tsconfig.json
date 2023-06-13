@@ -13,13 +13,13 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
-    "jsxImportSource": "@emotion/react",
     "baseUrl": ".",
     "paths": {
       "@/components/*": ["components/*"],
       "@/apis/*": ["apis/*"],
       "@/helpers/*": ["helpers/*"],
-      "@/types/*": ["types/*"]
+      "@/types/*": ["types/*"],
+      "@/styles/*": ["styles/*"]
     },
     "plugins": [
       {
@@ -27,6 +27,6 @@
       }
     ]
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "styles/global.scss"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
   "exclude": ["node_modules"]
 }

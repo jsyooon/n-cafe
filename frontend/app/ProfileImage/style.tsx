@@ -1,11 +1,9 @@
-import { css } from '@emotion/react';
-
-export const profileStyle = (size: number) => css`
+export const profileStyle = (size: number) => `
   width: ${size ?? 50}px;
   height: ${size ?? 50}px;
   overflow: hidden;
   border-radius: 100%;
-  background: var(--light-grey);
+  background: rgba(var(--black-color), 0.1);
 
   img {
     display: block;

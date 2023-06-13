@@ -1,6 +1,4 @@
-import { css } from '@emotion/react';
-
-export const errorStyle = css`
+export const errorStyle = `
   position: relative;
   height: calc(100vh - var(--header-height));
   display: flex;
@@ -8,27 +6,41 @@ export const errorStyle = css`
   justify-content: center;
   align-items: center;
   box-sizing: border-box;
-  padding-bottom: var(--header-height);
+  padding-bottom: 15vh;
 
   .title {
     display: flex;
     flex-direction: column;
     align-items: center;
-    font-weight: 100;
 
     .code {
       font-size: 8rem;
+      font-weight: 700;
       color: var(--error-color);
     }
 
     .type {
-      font-size: 1.8rem;
-      color: var(--normal-grey);
-      letter-spacing: 2px;
+      font-size: 2rem;
+      color: var(--grey-b-color);
+      font-weight: 100;
+
       margin-top: -1.2rem;
     }
   }
   .message {
     margin-top: 1.5rem;
+  }
+
+  .button-wrap {
+    display: flex;
+    justify-content: center;
+    margin-top: 1em;
+    gap: 0.5em;
+
+    button,
+    a {
+      font-size: 0.8rem;
+      width: 8em;
+    }
   }
 `;

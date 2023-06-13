@@ -1,0 +1,11 @@
+#app {
+  display: grid;
+  grid-template-rows: var(--header-height) auto;
+
+  .container {
+    position: relative;
+    width: 100%;
+    max-width: var(--content-width);
+    margin: 0 auto;
+  }
+}
