@@ -1,6 +1,18 @@
 const express = require('express');
 const router = express.Router();
 
+router.get('/', (req, res, next) => {
+  try {
+    if (req.user) {
+    } else {
+      res.status(200).json(null);
+    }
+  } catch (error) {
+    console.error(error);
+    next(error);
+  }
+});
+
 router.get('/signup', (req, res, next) => {
   const newUser = req.session.newUser;
   if (newUser) {
