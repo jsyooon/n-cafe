@@ -1,5 +1,3 @@
 export const cookieToString = (cookies: { [key in string]: any }) => {
-  return Object.entries(cookies)
-    .map((cookie) => cookie.join('='))
-    .join('&');
+  return cookies.map(({ name, value }) => `${name}=${value}`).join('&');
 };

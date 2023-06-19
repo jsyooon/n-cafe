@@ -1,10 +1,11 @@
 :root {
   /* size */
   --header-height: 60px;
-  --content-width: 1280px;
+  --content-width: 90%;
+  --content-max-width: 1280px;
 
   /* color */
-  --point-default-color: 14, 158, 233;
+  --point-default-color: 64, 205, 255;
   --white-color: 255, 255, 255;
   --black-color: 0, 0, 0;
 }

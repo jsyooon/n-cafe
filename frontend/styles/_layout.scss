@@ -3,9 +3,8 @@
   grid-template-rows: var(--header-height) auto;
 
   .container {
-    position: relative;
-    width: 100%;
-    max-width: var(--content-width);
+    width: var(--content-width);
+    max-width: var(--content-max-width);
     margin: 0 auto;
   }
 }

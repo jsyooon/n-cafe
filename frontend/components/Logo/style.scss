@@ -1,0 +1,8 @@
+.logo {
+  font-weight: 700;
+  font-size: inherit;
+
+  > span:first-child {
+    color: rgb(var(--point-default-color));
+  }
+}
