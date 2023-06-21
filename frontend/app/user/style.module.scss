@@ -1,0 +1,14 @@
+.userStyle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  padding-top: 10vh;
+
+  h2 {
+    text-align: center;
+    font-weight: 300;
+    font-size: 2rem;
+  }
+}

@@ -1,0 +1,27 @@
+.buttonStyle {
+  position: relative;
+  display: inline-flex;
+  border-radius: 0.2em;
+
+  &:disabled {
+    opacity: 0.1;
+  }
+
+  &:hover:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: rgba(var(--black-color), 0.03);
+    transition: background-color 0.2s;
+  }
+
+  :global * {
+    position: relative;
+    width: 100%;
+    box-sizing: border-box;
+    text-align: center;
+  }
+}

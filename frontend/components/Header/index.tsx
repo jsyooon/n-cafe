@@ -7,14 +7,14 @@ import Skeleton from '@/components/Skeleton';
 import { fetchData } from '@/helpers/fetch';
 import { cookieToString } from '@/helpers/cookie';
 import type { UserType } from '@/types/user';
-import './style.scss';
+import styles from './style.module.scss';
 
 export default function Header() {
   const user = fetchData<UserType>('/user', { headers: { Cookie: cookieToString(cookies().getAll()) } });
   const UTIL_SIZE = 36;
 
   return (
-    <header>
+    <header className={styles.header}>
       <div className='container'>
         <h1>
           <Link href='/'>

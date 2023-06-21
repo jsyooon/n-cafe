@@ -1,58 +1,56 @@
 'use client';
 
 import Link from 'next/link';
-import { buttonStyle } from './style';
+import styles from './style.module.scss';
 import type { PropsWithChildren } from 'react';
 
 interface PropsType {
   href?: string;
+  type?: 'submit' | 'button';
   style?: {
     outline?: true;
     width?: number | string;
-    height?: number | string;
+    height?: string;
     padding?: string;
-    margin?: string;
     fontSize?: number | string;
-    radius?: string;
+    radius?: boolean;
     fillType?: 'fill' | 'border';
     color?: string;
-    colorType?: string;
     borderColor?: string;
-    backgroundColor?: string;
+    fillColor?: string;
   };
   disabled?: boolean;
 
   onClick?: () => any;
 }
 
-export default function Button({ children, href, style = { colorType: 'point', fillType: 'fill' }, disabled, onClick }: PropsWithChildren<PropsType>) {
+export default function Button({ children, href, type, style, disabled, onClick }: PropsWithChildren<PropsType>) {
   return (
     <>
       {href ? (
-        <Link href={href}>{children}</Link>
+        <span className={`button ${styles.buttonStyle}`}>
+          <Link href={href}>{children}</Link>
+        </span>
       ) : (
-        <button type='button' onClick={onClick} disabled={disabled}>
+        <button type={type ?? 'button'} onClick={onClick} disabled={disabled} className={`button ${styles.buttonStyle}`}>
           <span>{children}</span>
         </button>
       )}
 
-      <style jsx>{buttonStyle}</style>
       <style jsx>{`
-        :global(a) {
-          line-height: ${style.height};
-        }
-        a,
-        button {
+        .button {
           ${style.width ? `width: ${style.width}` : ''};
-          ${style.height ? `height: ${style.height}` : ''};
-          border: ${style.fillType === 'border' ? style.borderColor ?? `1px solid var(--${style.colorType}-color)` : 0};
-          color: ${style.color ?? style.fillType === 'border' ? `rgb(var(--${style.colorType}-color))` : 'rgb(var(--white-color))'};
+          height: ${style.height ?? '2.5em'};
+          border: ${style.fillType === 'border' ? `1px solid ${style.borderColor ?? style.color}` : 0};
+          color: ${style.color ? style.color : style.fillType === 'border' ? 'inherit' : 'rgb(var(--white-color))'};
           font-size: ${style.fontSize ? `${style.fontSize}` : 'inherit'};
-          background-color: ${style.fillType === 'border' ? 'rgb(var(--white-color))' : style.backgroundColor ?? `rgb(var(--${style.colorType}-color))`};
-          padding: ${style.padding ?? 0};
-          margin: ${style.margin ?? 0};
-          cursor: pointer;
-          ${style.radius ? `border-radius: ${style.radius}` : ''};
+          background-color: ${style.fillType === 'border' ? 'rgb(var(--white-color))' : style.fillColor ?? style.color};
+          line-height: ${style.height ?? '2.5em'};
+        }
+
+        .button :global(a),
+        button {
+          ${style.padding ? `padding: ${style.padding}` : ''};
         }
       `}</style>
     </>

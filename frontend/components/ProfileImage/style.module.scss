@@ -1,6 +1,4 @@
-export const profileStyle = (size: number) => `
-  width: ${size ?? 50}px;
-  height: ${size ?? 50}px;
+.profileStyle {
   overflow: hidden;
   border-radius: 100%;
   background: rgba(var(--black-color), 0.1);
@@ -12,4 +10,4 @@ export const profileStyle = (size: number) => `
     object-fit: cover;
     object-position: center;
   }
-`;
+}

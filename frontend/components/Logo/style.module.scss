@@ -1,0 +1,10 @@
+.logo {
+  font-weight: 400;
+  font-family: var(--font-figtree);
+  font-size: inherit;
+
+  > span:first-child {
+    font-weight: 700;
+    color: rgb(var(--point-color));
+  }
+}
