@@ -2,4 +2,14 @@
   width: 100%;
   max-width: 300px;
   margin-top: 5vh;
+
+  :global .button {
+    width: 100%;
+    height: 3.5em;
+
+    &.kakao {
+      background-color: #fee500;
+      color: #191919;
+    }
+  }
 }

@@ -1,4 +1,4 @@
-.errorStyle {
+.errorLayout {
   position: relative;
   height: calc(100vh - var(--header-height));
   display: flex;
@@ -33,6 +33,13 @@
     .message {
       margin: 1em 0 3em;
       text-align: center;
+    }
+
+    .button-wrap {
+      .button {
+        border: 1px solid rgba(var(--black-color), 0.3);
+        padding: 0.5em 1em;
+      }
     }
   }
 }

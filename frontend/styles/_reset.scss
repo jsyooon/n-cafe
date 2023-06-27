@@ -8,6 +8,7 @@ h1,
 h2,
 h3,
 a,
+p,
 button,
 input {
   margin: unset;
@@ -26,9 +27,15 @@ a {
 
 button {
   cursor: pointer;
+  border: 0;
+  background: transparent;
 }
 
 input {
   font-size: inherit;
+  font-family: inherit;
+  font-weight: inherit;
+  background: transparent;
   outline: 0;
+  border: 0;
 }

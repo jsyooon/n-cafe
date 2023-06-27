@@ -2,6 +2,8 @@
   position: relative;
   display: inline-flex;
   border-radius: 0.2em;
+  align-items: center;
+  font-size: inherit;
 
   &:disabled {
     opacity: 0.1;
