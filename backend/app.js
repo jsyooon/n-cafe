@@ -1,3 +1,4 @@
+const path = require('path');
 const express = require('express');
 const session = require('express-session');
 const cors = require('cors');
@@ -31,6 +32,7 @@ app.use(
 );
 app.use(cookieParser());
 app.use(express.json());
+app.use('/upload', express.static(path.join(__dirname, 'upload')));
 app.use(express.urlencoded({ extended: true }));
 
 app.use(passport.initialize());
