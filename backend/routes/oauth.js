@@ -10,14 +10,14 @@ router.get('/kakao', (req, res, next) => {
       // 로그인 세션 생성
       return req.login(user, (error) => {
         if (error) return next(error);
-        res.status(200).json(user);
+        res.redirect('http://localhost:3000');
       });
     }
 
     const { provider, id } = info;
 
     // 회원가입용 세션 셍성
-    req.session.newUser = {
+    req.session.signupUser = {
       provider,
       snsId: id,
       name: info._json.properties.nickname,
