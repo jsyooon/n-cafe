@@ -8,6 +8,7 @@ const loginRouter = require('./routes/login');
 const oauthRouter = require('./routes/oauth');
 const userRouter = require('./routes/user');
 const passportConfig = require('./passport/index');
+const { FRONT_DOMAIN } = require('./config/const');
 
 const app = express();
 
@@ -19,7 +20,7 @@ passportConfig();
 
 app.use(
   cors({
-    origin: 'http://localhost:3000',
+    origin: FRONT_DOMAIN,
     credentials: true,
   })
 );

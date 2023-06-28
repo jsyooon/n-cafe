@@ -1,6 +1,7 @@
 const express = require('express');
 const passport = require('passport');
 const router = express.Router();
+const { FRONT_DOMAIN } = require('../config/const');
 
 router.get('/kakao', (req, res, next) => {
   passport.authenticate('kakao', (error, user, info) => {
@@ -10,7 +11,7 @@ router.get('/kakao', (req, res, next) => {
       // 로그인 세션 생성
       return req.login(user, (error) => {
         if (error) return next(error);
-        res.redirect('http://localhost:3000');
+        res.redirect(FRONT_DOMAIN);
       });
     }
 
@@ -25,7 +26,7 @@ router.get('/kakao', (req, res, next) => {
     };
 
     return req.session.save(() => {
-      res.redirect('http://localhost:3000/user/signup');
+      res.redirect(`${FRONT_DOMAIN}/user/signup`);
     });
   })(req, res, next);
 });
