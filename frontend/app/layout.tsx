@@ -1,6 +1,7 @@
 import { Noto_Sans_KR, Figtree } from 'next/font/google';
 import Header from '@/components/Header';
 import StyledJsxRegistry from './registry';
+import type { PropsWithChildren } from 'react';
 import '@/styles/global.scss';
 
 const noto_sans_korea = Noto_Sans_KR({
@@ -15,7 +16,7 @@ const figtree = Figtree({
   variable: '--font-figtree',
 });
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({ children }: PropsWithChildren) {
   return (
     <html lang='ko' className={`${noto_sans_korea.variable} ${figtree.variable}`}>
       <head></head>
