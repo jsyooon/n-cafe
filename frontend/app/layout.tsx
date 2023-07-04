@@ -1,6 +1,7 @@
 import { Noto_Sans_KR, Figtree } from 'next/font/google';
-import Header from '@/components/Header';
-import StyledJsxRegistry from './registry';
+import Header from '@/app/header/index';
+import StyledJsxRegistry from '@/app/registry';
+import ReactQueryProvider from '@/app/react-query-provider';
 import type { PropsWithChildren } from 'react';
 import '@/styles/global.scss';
 
@@ -20,14 +21,14 @@ export default function RootLayout({ children }: PropsWithChildren) {
   return (
     <html lang='ko' className={`${noto_sans_korea.variable} ${figtree.variable}`}>
       <head></head>
-
       <body>
-        <StyledJsxRegistry>
-          <main id='app'>
+        <main id='app'>
+          <ReactQueryProvider>
             <Header />
             <section>{children}</section>
-          </main>
-        </StyledJsxRegistry>
+          </ReactQueryProvider>
+        </main>
+        <StyledJsxRegistry />
       </body>
     </html>
   );
