@@ -8,6 +8,6 @@ export type CookieItemType = Array<{
 }>;
 
 export interface FetchOptionType<T = any> {
-  cookie?: string | CookieItemType;
+  cookie?: CookieItemType;
   body?: T;
 }

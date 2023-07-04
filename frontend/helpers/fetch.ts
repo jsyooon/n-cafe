@@ -11,11 +11,15 @@ const getResponseData = <T>(response: Response, data: T): ResponseType<T> => {
   };
 };
 
-const getHeaderWithCookie = (cookie?: string | CookieItemType): RequestInit['headers'] => {
-  if (!cookie) return {};
+const getHeaderWithCookie = (cookie?: CookieItemType): RequestInit['headers'] => {
+  if (cookie) {
+    return {
+      Cookie: cookie?.map(({ name, value }) => `${name}=${value}`)?.join('&'),
+    };
+  }
 
   return {
-    Cookie: typeof cookie === 'string' ? cookie : cookie.map(({ name, value }) => `${name}=${value}`).join('&'),
+    Cookie: document?.cookie,
   };
 };
 
@@ -42,7 +46,6 @@ const fetchCommon = async <T>(url: string, options?: RequestInit) => {
       ...defaultParams,
       ...options,
     });
-
     if (!response.ok) {
       const message = await response.text();
       throw new FetchError({ status: response.status, message });
