@@ -21,7 +21,9 @@
       "@/hooks/*": ["hooks/*"],
       "@/helpers/*": ["helpers/*"],
       "@/types/*": ["types/*"],
-      "@/styles/*": ["styles/*"]
+      "@/styles/*": ["styles/*"],
+      "@/queries/*": ["queries/*"],
+      "@/app/*": ["app/*"]
     },
     "plugins": [
       {
