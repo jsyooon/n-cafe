@@ -15,7 +15,7 @@ interface Props {
   onSubmit(value: UserType): void;
 }
 
-export default function Signup({ data, onSubmit }: Props) {
+export default function UserInfoForm({ data, onSubmit }: Props) {
   const [name, setName] = useState(data.name);
   const [nameError, setNameError] = useState('');
   const nameDebounce = useRef<ReturnType<typeof debounce>>();
