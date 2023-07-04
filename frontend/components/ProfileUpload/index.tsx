@@ -19,7 +19,7 @@ export default function ProfileUpload({ profileImage, onChange }: Props) {
       const body = new FormData();
       body.append('profile', file);
 
-      const response = await fetchPost('/user/profile', {
+      const response = await fetchPost('/upload/profile', {
         body,
       });
       if (response.data) {
