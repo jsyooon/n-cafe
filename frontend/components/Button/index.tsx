@@ -17,9 +17,9 @@ export default function Button({ children, href, type, disabled, className, onCl
   return (
     <>
       {href ? (
-        <span className={buttonClassName}>
-          <Link href={href}>{children}</Link>
-        </span>
+        <Link href={href} className={buttonClassName}>
+          <span>{children}</span>
+        </Link>
       ) : (
         <button type={type ?? 'button'} onClick={onClick} disabled={disabled} className={buttonClassName}>
           <span>{children}</span>

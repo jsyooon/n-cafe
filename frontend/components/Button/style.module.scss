@@ -4,6 +4,7 @@
   border-radius: 0.2em;
   align-items: center;
   font-size: inherit;
+  overflow: hidden;
 
   &:disabled {
     opacity: 0.1;
@@ -20,7 +21,7 @@
     transition: background-color 0.2s;
   }
 
-  :global * {
+  > span:first-child {
     position: relative;
     width: 100%;
     box-sizing: border-box;
