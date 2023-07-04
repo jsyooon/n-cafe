@@ -4,7 +4,7 @@ const path = require('path');
 exports.profileUpload = multer({
   storage: multer.diskStorage({
     destination: function (req, file, done) {
-      done(null, 'upload/profile');
+      done(null, 'static/profile');
     },
     filename: function (req, file, done) {
       const ext = path.extname(file.originalname);

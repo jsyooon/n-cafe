@@ -1,27 +1,27 @@
 const express = require('express');
 const router = express.Router();
 const { User } = require('../models');
-const { profileUpload } = require('../upload');
+const { isAuth, isUnAuth } = require('./middlewares');
 
 router.get('/', async (req, res, next) => {
   try {
-    if (req.user) {
-      const user = await User.findOne({
-        where: { id: req.user.id },
-        attributes: ['name', 'profileImage'],
-      });
+    if (!req.user) return res.status(200).json(null);
 
-      return res.status(200).json(user);
-    }
-    res.status(200).json(null);
+    const user = await User.findOne({
+      where: { id: req.user.id },
+      attributes: ['name', 'profileImage'],
+    });
+
+    return res.status(200).json(user);
   } catch (error) {
     console.error(error);
     next(error);
   }
 });
 
-router.get('/signup', (req, res, next) => {
+router.get('/signup', isUnAuth, (req, res, next) => {
   const signupUser = req.session.signupUser;
+
   if (!signupUser) {
     return req.session.destroy(() => {
       res.clearCookie('signupUser');
@@ -35,7 +35,7 @@ router.get('/signup', (req, res, next) => {
   });
 });
 
-router.post('/signup', async (req, res, next) => {
+router.post('/signup', isUnAuth, async (req, res, next) => {
   try {
     const signupUser = req.session.signupUser;
 
@@ -66,14 +66,6 @@ router.get('/name', async (req, res, next) => {
     return res.status(409).send('이미 존재하는 닉네임입니다.');
   } catch (error) {
     next(error);
-  }
-});
-
-router.post('/profile', profileUpload.single('profile'), (req, res, next) => {
-  try {
-    return res.status(200).send(`http://localhost:3100/${req.file.path}`);
-  } catch (error) {
-    return res.status(500).send('잠시 후 다시 시도해 주세요.');
   }
 });
 

@@ -7,6 +7,7 @@ const passport = require('passport');
 const loginRouter = require('./routes/login');
 const oauthRouter = require('./routes/oauth');
 const userRouter = require('./routes/user');
+const uploadRouter = require('./routes/upload');
 const passportConfig = require('./passport/index');
 const { FRONT_DOMAIN } = require('./config/const');
 
@@ -33,7 +34,7 @@ app.use(
 );
 app.use(cookieParser());
 app.use(express.json());
-app.use('/upload', express.static(path.join(__dirname, 'upload')));
+app.use('/static', express.static(path.join(__dirname, 'static')));
 app.use(express.urlencoded({ extended: true }));
 
 app.use(passport.initialize());
@@ -42,6 +43,7 @@ app.use(passport.session());
 app.use('/login', loginRouter);
 app.use('/oauth', oauthRouter);
 app.use('/user', userRouter);
+app.use('/upload', uploadRouter);
 
 app.listen(3100, () => {
   console.log('App is running');
