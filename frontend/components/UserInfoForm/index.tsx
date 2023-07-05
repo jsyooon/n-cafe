@@ -12,10 +12,11 @@ import type { UserType } from '@/types/user';
 
 interface Props {
   data: UserType;
+  title?: string;
   onSubmit(value: UserType): void;
 }
 
-export default function UserInfoForm({ data, onSubmit }: Props) {
+export default function UserInfoForm({ data, title, onSubmit }: Props) {
   const [name, setName] = useState(data.name);
   const [nameError, setNameError] = useState('');
   const nameDebounce = useRef<ReturnType<typeof debounce>>();
@@ -72,6 +73,7 @@ export default function UserInfoForm({ data, onSubmit }: Props) {
 
   return (
     <>
+      {title && <h2 className={styles.title}>{title}</h2>}
       <form className={styles.userInfoForm} onSubmit={onSubmitEvent}>
         <ProfileUpload profileImage={profileImage} onChange={setProfileImage} />
         <InputText placeholder='닉네임' className='name-wrap' value={name} onChange={onChangeName} />
