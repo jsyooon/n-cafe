@@ -12,15 +12,17 @@ const getResponseData = <T>(response: Response, data: T): ResponseType<T> => {
 };
 
 const getHeaderWithCookie = (cookie?: CookieItemType): RequestInit['headers'] => {
-  if (cookie) {
+  if (Array.isArray(cookie)) {
     return {
       Cookie: cookie?.map(({ name, value }) => `${name}=${value}`)?.join('&'),
     };
   }
 
-  return {
-    Cookie: document?.cookie,
-  };
+  if (typeof cookie === 'string') {
+    return { Cookie: cookie };
+  }
+
+  return {};
 };
 
 const getResponse = async <T>(response: Response) => {
@@ -75,4 +77,19 @@ export const fetchPost = <T = string>(url: string, options?: FetchOptionType) =>
   }
 
   return fetchCommon<T>(url, { method: 'POST', headers, body });
+};
+
+export const fetchPut = <T = string>(url: string, options?: FetchOptionType) => {
+  const headers = getHeaderWithCookie(options?.cookie);
+
+  let { body } = options;
+
+  if (body instanceof Object && !(body instanceof FormData)) {
+    headers['Content-Type'] = 'application/json';
+    body = JSON.stringify(body);
+  } else if (typeof body === 'number' || typeof body === 'string') {
+    headers['Content-Type'] = 'text/plain';
+  }
+
+  return fetchCommon<T>(url, { method: 'PUT', headers, body });
 };
