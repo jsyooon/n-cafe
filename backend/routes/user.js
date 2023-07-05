@@ -25,6 +25,8 @@ router.put('/', isAuth, async (req, res, next) => {
     await User.update(req.body, {
       where: { id: req.user.id },
     });
+
+    return res.status(200).send('OK');
   } catch (error) {
     console.error(error);
     next(error);
