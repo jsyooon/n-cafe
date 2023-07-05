@@ -3,7 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import type { UserType } from '@/types/user';
 import { type CookieItemType } from '@/types/fetch';
 
-export const USER_QUERY_KEY = ['/user'] as const;
+export const USER_QUERY_KEY = ['user'] as const;
 
 let fetchUserPromise: () => Promise<UserType>;
 

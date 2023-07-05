@@ -1,7 +1,10 @@
 'use client';
 
+import { redirect } from 'next/navigation';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import UserInfoForm from '@/components/UserInfoForm';
 import { fetchPost } from '@/helpers/fetch';
+import { USER_QUERY_KEY } from '@/queries/useUserQuery';
 import type { UserType } from '@/types/user';
 
 interface Props {
@@ -9,11 +12,16 @@ interface Props {
 }
 
 export default function Form({ data }: Props) {
+  const { mutate } = useMutation({ mutationFn: (body: UserType) => fetchPost('/user/signup', { body }) });
+  const queryClient = useQueryClient();
   const onSubmit = async (body: UserType) => {
-    try {
-      const response = await fetchPost('/user/signup', { body });
-    } catch (error) {}
+    mutate(body, {
+      onSuccess() {
+        queryClient.invalidateQueries(USER_QUERY_KEY);
+        redirect('/user/welcome');
+      },
+    });
   };
 
-  return <UserInfoForm data={data} onSubmit={onSubmit} />;
+  return <UserInfoForm data={data} title='회원가입' onSubmit={onSubmit} />;
 }
