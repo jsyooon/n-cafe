@@ -2,6 +2,8 @@ import { Noto_Sans_KR, Figtree } from 'next/font/google';
 import Header from '@/app/header/index';
 import StyledJsxRegistry from '@/app/registry';
 import ReactQueryProvider from '@/app/react-query-provider';
+import RecoilRoot from '@/app/recoil-root';
+import Toast from '@/components/toast';
 import type { PropsWithChildren } from 'react';
 import '@/styles/global.scss';
 
@@ -24,8 +26,11 @@ export default function RootLayout({ children }: PropsWithChildren) {
       <body>
         <main id='app'>
           <ReactQueryProvider>
-            <Header />
-            <section>{children}</section>
+            <RecoilRoot>
+              <Header />
+              <section>{children}</section>
+              <Toast />
+            </RecoilRoot>
           </ReactQueryProvider>
         </main>
         <StyledJsxRegistry />
