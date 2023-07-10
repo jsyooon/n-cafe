@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { cookies } from 'next/headers';
 import Util from './util';
-import Logo from '@/components/Logo';
+import Logo from '@/components/logo';
 import HydrateOnServer from '@/app/hydrate-on-server';
 import { USER_QUERY_KEY, fetchUser } from '@/queries/useUserQuery';
 

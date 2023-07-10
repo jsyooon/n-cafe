@@ -1,7 +1,7 @@
 'use client';
 
 import { type ChangeEvent } from 'react';
-import ProfileImage from '@/components/ProfileImage';
+import ProfileImage from '@/components/profileImage';
 import { fetchPost } from '@/helpers/fetch';
 import { AiOutlineCamera } from 'react-icons/ai';
 import styles from './style.module.scss';

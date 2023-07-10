@@ -1,6 +1,6 @@
 'use client';
 
-import Button from '@/components/Button';
+import Button from '@/components/button';
 import styles from './style.module.scss';
 
 interface PropsType {
