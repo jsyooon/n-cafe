@@ -23,6 +23,7 @@
       "@/types/*": ["types/*"],
       "@/styles/*": ["styles/*"],
       "@/queries/*": ["queries/*"],
+      "@/atom": ["atom.ts"],
       "@/app/*": ["app/*"]
     },
     "plugins": [
