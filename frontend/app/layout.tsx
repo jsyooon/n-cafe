@@ -1,4 +1,5 @@
 import { Noto_Sans_KR, Figtree } from 'next/font/google';
+import { Metadata } from 'next';
 import { cookies } from 'next/headers';
 import Header from '@/app/header/index';
 import StyledJsxRegistry from '@/app/registry';
@@ -21,6 +22,13 @@ const figtree = Figtree({
   preload: false,
   variable: '--font-figtree',
 });
+
+export const metadata: Metadata = {
+  title: {
+    template: '%s | ncafe',
+    default: 'ncafe',
+  },
+};
 
 export default function RootLayout({ children }: PropsWithChildren) {
   return (
