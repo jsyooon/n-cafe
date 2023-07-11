@@ -13,7 +13,7 @@ interface Props extends ToastConfig {
   type: ToastType;
 }
 
-export default function ToastItem({ id, message, showCloseButton = false, type, closeTime = 1500 }: Props) {
+export default function ToastItem({ id, message, showCloseButton = false, type, closeTime = 1000 }: Props) {
   const setToastList = useSetRecoilState(toastListState);
   const [active, setActive] = useState(false);
   const closeTimer = useRef<ReturnType<typeof setTimeout>>();
