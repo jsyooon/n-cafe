@@ -5,7 +5,7 @@ import { AiOutlineUser } from 'react-icons/ai';
 import { useUserQuery } from '@/queries/useUserQuery';
 import User from './user';
 
-export default function Posts() {
+export default function Util() {
   const { data } = useUserQuery();
 
   return (
