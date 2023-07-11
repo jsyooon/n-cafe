@@ -10,6 +10,7 @@ import type { UserType } from '@/types/user';
 
 export default function Form() {
   const { data } = useUserQuery();
+
   const toast = useToast();
   if (!data) redirect('/error/401');
 

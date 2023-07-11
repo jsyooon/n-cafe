@@ -1,8 +1,11 @@
 import { Noto_Sans_KR, Figtree } from 'next/font/google';
+import { cookies } from 'next/headers';
 import Header from '@/app/header/index';
 import StyledJsxRegistry from '@/app/registry';
 import ReactQueryProvider from '@/app/react-query-provider';
 import RecoilRoot from '@/app/recoil-root';
+import HydrateOnServer from '@/app/hydrate-on-server';
+import { USER_QUERY_KEY, fetchUser } from '@/queries/useUserQuery';
 import Toast from '@/components/toast';
 import type { PropsWithChildren } from 'react';
 import '@/styles/global.scss';
@@ -27,9 +30,11 @@ export default function RootLayout({ children }: PropsWithChildren) {
         <main id='app'>
           <ReactQueryProvider>
             <RecoilRoot>
-              <Header />
-              <section>{children}</section>
-              <Toast />
+              <HydrateOnServer queryKey={USER_QUERY_KEY} queryFn={fetchUser(cookies().getAll())}>
+                <Header />
+                <section>{children}</section>
+                <Toast />
+              </HydrateOnServer>
             </RecoilRoot>
           </ReactQueryProvider>
         </main>

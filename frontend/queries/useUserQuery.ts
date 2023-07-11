@@ -12,4 +12,4 @@ export const fetchUser = (cookie?: CookieItemType) => {
   return fetchUserPromise;
 };
 
-export const useUserQuery = () => useQuery({ queryKey: USER_QUERY_KEY, queryFn: fetchUser() });
+export const useUserQuery = () => useQuery({ queryKey: USER_QUERY_KEY, queryFn: fetchUser(), refetchOnMount: false });
