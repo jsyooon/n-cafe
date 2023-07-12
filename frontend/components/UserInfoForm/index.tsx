@@ -78,7 +78,7 @@ export default function UserInfoForm({ data, title, onSubmit }: Props) {
         <ProfileUpload profileImage={profileImage} onChange={setProfileImage} />
         <InputText placeholder='닉네임' className='name-wrap' value={name} onChange={onChangeName} />
         <p className='error-text'>{nameError}</p>
-        <Button type='submit' className='submit-button'>
+        <Button type='submit' className='submit-button' point fill>
           완료
         </Button>
       </form>

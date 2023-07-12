@@ -9,11 +9,13 @@ interface PropsType {
   type?: 'submit' | 'button';
   className?: string;
   disabled?: boolean;
+  point?: boolean;
+  fill?: boolean;
   onClick?: () => any;
 }
 
-export default function Button({ children, href, type, disabled, className, onClick }: PropsWithChildren<PropsType>) {
-  const buttonClassName = `button ${className ?? ''} ${styles.buttonStyle}`;
+export default function Button({ children, href, type, disabled, className, point, onClick, fill }: PropsWithChildren<PropsType>) {
+  const buttonClassName = ['button', styles.button, className, point ? styles.pointColor : '', fill ? styles.fill : ''].filter((value) => value).join(' ');
   return (
     <>
       {href ? (

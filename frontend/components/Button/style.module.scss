@@ -1,6 +1,7 @@
-.buttonStyle {
+.button {
   position: relative;
   display: inline-flex;
+  box-sizing: border-box;
   border-radius: 0.2em;
   align-items: center;
   font-size: inherit;
@@ -27,4 +28,15 @@
     box-sizing: border-box;
     text-align: center;
   }
+}
+
+.pointColor {
+  background-color: rgba(var(--point-color));
+  color: rgba(var(--white-color));
+}
+
+.fill {
+  width: 100%;
+  padding: 0.8em 0;
+  max-width: 300px;
 }

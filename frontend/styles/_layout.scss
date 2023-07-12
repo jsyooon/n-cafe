@@ -7,4 +7,8 @@
     max-width: var(--content-max-width);
     margin: 0 auto;
   }
+
+  section {
+    min-height: calc(100vh - var(--header-height));
+  }
 }
