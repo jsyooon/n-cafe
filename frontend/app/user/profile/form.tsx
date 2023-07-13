@@ -14,7 +14,7 @@ export default function Form() {
   const toast = useToast();
   if (!data) redirect('/error/401');
 
-  const { mutate } = useMutation({ mutationFn: (body: UserType) => fetchPut('/user', { body, cookie: document.cookie }) });
+  const { mutate } = useMutation({ mutationFn: (body: UserType) => fetchPut('/user', { body }) });
   const queryClient = useQueryClient();
 
   const onSubmit = (body: UserType) => {
