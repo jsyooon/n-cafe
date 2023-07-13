@@ -1,6 +1,6 @@
 'use client';
 
-import { redirect } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import UserInfoForm from '@/components/userInfoForm';
 import { fetchPost } from '@/helpers/fetch';
@@ -12,13 +12,14 @@ interface Props {
 }
 
 export default function Form({ data }: Props) {
+  const router = useRouter();
   const { mutate } = useMutation({ mutationFn: (body: UserType) => fetchPost('/user/signup', { body }) });
   const queryClient = useQueryClient();
   const onSubmit = async (body: UserType) => {
     mutate(body, {
-      onSuccess() {
+      async onSuccess() {
         queryClient.invalidateQueries(USER_QUERY_KEY);
-        redirect('/user/welcome');
+        router.replace('/user/welcome');
       },
     });
   };
