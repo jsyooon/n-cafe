@@ -8,6 +8,7 @@ export const USER_QUERY_KEY = ['user'] as const;
 let fetchUserPromise: () => Promise<UserType>;
 
 export const fetchUser = (cookie?: CookieItemType) => {
+  if (cookie) fetchUserPromise = null;
   fetchUserPromise ??= () => fetchGet<UserType>('/user', { cookie }).then((response) => response?.data);
   return fetchUserPromise;
 };
