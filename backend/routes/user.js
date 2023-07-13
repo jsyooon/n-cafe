@@ -57,23 +57,27 @@ router.post('/signup', isUnAuth, async (req, res, next) => {
       return res.status(401).send('사용자 정보가 존재하지 않습니다.');
     }
 
-    await User.create({
+    const user = await User.create({
       snsId: signupUser.snsId,
       provider: signupUser.provider,
       name: req.body.name,
       profileImage: req.body.profileImage,
     });
 
-    return req.session.destroy(() => {
-      res.clearCookie('signupUser');
-      res.status(200).send('OK');
+    return req.session.regenerate(() => {
+      req.login(user, (error) => {
+        if (error) {
+          next(error);
+        }
+        res.status(201).send('OK');
+      });
     });
   } catch (error) {
     next(error);
   }
 });
 
-router.get('/name', isAuth, async (req, res, next) => {
+router.get('/name', async (req, res, next) => {
   try {
     const existingUser = await User.findOne({ where: { name: req.query.value } });
     if (!existingUser || existingUser.id === req.user.id) return res.status(200).send('ok');
