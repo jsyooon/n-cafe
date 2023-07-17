@@ -1,4 +1,5 @@
 const express = require('express');
+const qs = require('qs');
 const router = express.Router();
 const { User } = require('../models');
 const { isAuth, isUnAuth } = require('./middlewares');
@@ -27,6 +28,29 @@ router.put('/', isAuth, async (req, res, next) => {
     });
 
     return res.status(200).send('OK');
+  } catch (error) {
+    console.error(error);
+    next(error);
+  }
+});
+
+router.post('/logout', isAuth, async (req, res, next) => {
+  try {
+    await fetch('https://kapi.kakao.com/v1/user/logout', {
+      method: 'POST',
+      headers: {
+        Authorization: `KakaoAK ${process.env.KAKAO_ADMIN_ID}`,
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: qs.stringify({
+        target_id_type: 'user_id',
+        target_id: +req.user.snsId,
+      }),
+    });
+
+    req.session.destroy(() => {
+      return res.status(200).send('OK');
+    });
   } catch (error) {
     console.error(error);
     next(error);
