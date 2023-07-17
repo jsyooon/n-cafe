@@ -1,0 +1,27 @@
+.dropdown {
+  position: relative;
+}
+
+.menu {
+  position: absolute;
+  top: 100%;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 5px 14px -5px rgba(var(--black-color), 0.2);
+  border-radius: 0.2em;
+  background-color: rgb(var(--white-color));
+  white-space: nowrap;
+  overflow: hidden;
+
+  > * {
+    text-align: left;
+    line-height: 1;
+    font-size: 0.8em;
+    color: rgba(var(--black-color), 0.9);
+    padding: 1em 2em;
+
+    &:hover {
+      background-color: rgba(var(--black-color), 0.02);
+    }
+  }
+}
