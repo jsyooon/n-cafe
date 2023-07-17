@@ -5,13 +5,13 @@ import styles from './style.module.scss';
 
 export default function ProfileImage({ src, size }: { src?: string; size?: number }) {
   return (
-    <div className={styles.profileStyle}>
+    <span className={styles.profile}>
       {src ? <img src={src} /> : <AiOutlineUser />}
       <style jsx>{`
-        div {
-          ${size && `width: ${size}px`};
+        span {
+          ${size ? `width: ${size}px` : ''};
         }
       `}</style>
-    </div>
+    </span>
   );
 }

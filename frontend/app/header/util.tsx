@@ -13,7 +13,7 @@ export default function Util() {
       {data ? (
         <User user={data} />
       ) : (
-        <Link href='/user/login'>
+        <Link href='/user/login' className='login-button'>
           <AiOutlineUser size='70%' />
         </Link>
       )}
