@@ -11,7 +11,7 @@ const getResponseData = <T>(response: Response, data: T): ResponseType<T> => {
   };
 };
 
-const getHeaderWithCookie = (cookie?: CookieItemType): RequestInit['headers'] => {
+const getCookie = (cookie?: CookieItemType): RequestInit['headers'] => {
   if (Array.isArray(cookie)) {
     return {
       Cookie: cookie?.map(({ name, value }) => `${name}=${value}`)?.join('&'),
@@ -23,6 +23,22 @@ const getHeaderWithCookie = (cookie?: CookieItemType): RequestInit['headers'] =>
   }
 
   return {};
+};
+
+const getHeaderWithBody = (options?: FetchOptionType) => {
+  const result = {
+    headers: { ...getCookie(options?.cookie) },
+    ...(options?.body ? { body: options.body } : null),
+  };
+
+  if (result.body instanceof Object && !(result.body instanceof FormData)) {
+    result.headers['Content-Type'] = 'application/json';
+    if (result.body) result.body = JSON.stringify(result.body);
+  } else if (typeof result.body === 'number' || typeof result.body === 'string') {
+    result.headers['Content-Type'] = 'text/plain';
+  }
+
+  return result;
 };
 
 const getResponse = async <T>(response: Response) => {
@@ -59,37 +75,14 @@ const fetchCommon = async <T>(url: string, options?: RequestInit) => {
 };
 
 export const fetchGet = <T = string>(url: string, options?: FetchOptionType) => {
-  const headers = getHeaderWithCookie(options?.cookie);
-  headers['Content-Type'] = 'application/json';
+  const headers = { ...getCookie(options?.cookie), 'Content-Type': 'application/json' };
   return fetchCommon<T>(url, { method: 'GET', headers });
 };
 
 export const fetchPost = <T = string>(url: string, options?: FetchOptionType) => {
-  const headers = getHeaderWithCookie(options?.cookie);
-
-  let { body } = options;
-
-  if (body instanceof Object && !(body instanceof FormData)) {
-    headers['Content-Type'] = 'application/json';
-    body = JSON.stringify(body);
-  } else if (typeof body === 'number' || typeof body === 'string') {
-    headers['Content-Type'] = 'text/plain';
-  }
-
-  return fetchCommon<T>(url, { method: 'POST', headers, body });
+  return fetchCommon<T>(url, { method: 'POST', ...getHeaderWithBody(options) });
 };
 
 export const fetchPut = <T = string>(url: string, options?: FetchOptionType) => {
-  const headers = getHeaderWithCookie(options?.cookie);
-
-  let { body } = options;
-
-  if (body instanceof Object && !(body instanceof FormData)) {
-    headers['Content-Type'] = 'application/json';
-    body = JSON.stringify(body);
-  } else if (typeof body === 'number' || typeof body === 'string') {
-    headers['Content-Type'] = 'text/plain';
-  }
-
-  return fetchCommon<T>(url, { method: 'PUT', headers, body });
+  return fetchCommon<T>(url, { method: 'PUT', ...getHeaderWithBody(options) });
 };
