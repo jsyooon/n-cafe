@@ -1,27 +1,21 @@
 'use client';
 
-import { useState } from 'react';
-import DropdownContext, { type ValueType } from './context';
+import DropdownContext from './context';
 import DropdownSelected from './selected';
 import DropdownList from './list';
 import type { PropsWithChildren } from 'react';
+import type { StateType } from './context';
 import styles from './style.module.scss';
 
-interface Props extends Partial<Pick<ValueType, 'inset'>> {
+interface Props extends Partial<Pick<StateType, 'inset'>> {
   open?: boolean;
 }
 
-function Dropdown({ children, open, inset = 'start' }: PropsWithChildren<Props>) {
-  const [isOpen, setIsOpen] = useState(open);
-
-  const toggleOpen = (value: boolean) => {
-    setIsOpen(value);
-  };
-
+function Dropdown({ children, open = false, inset = 'start' }: PropsWithChildren<Props>) {
   return (
-    <DropdownContext.Provider value={{ isOpen, inset, toggleOpen }}>
+    <DropdownContext initialState={{ isOpen: open, inset }}>
       <div className={styles.dropdown}>{children}</div>
-    </DropdownContext.Provider>
+    </DropdownContext>
   );
 }
 

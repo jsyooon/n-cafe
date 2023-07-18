@@ -1,12 +1,14 @@
 'use client';
 
 import { PropsWithChildren, useContext } from 'react';
-import DropdownContext from './context';
+import { DropdownDispatchContext, DropdownStateContext } from './context';
 
 export default function DropdownSelected({ children }: PropsWithChildren) {
-  const { isOpen, toggleOpen } = useContext(DropdownContext);
+  const { isOpen } = useContext(DropdownStateContext);
+  const dispatch = useContext(DropdownDispatchContext);
 
-  const onClickSelected = () => toggleOpen(!isOpen);
+  const onClickSelected = () => dispatch({ type: 'toggle', payload: !isOpen });
+
   return (
     <button type='button' onClick={onClickSelected}>
       {children}
