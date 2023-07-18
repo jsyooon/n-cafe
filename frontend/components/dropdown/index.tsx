@@ -1,6 +1,6 @@
 'use client';
 
-import DropdownContext from './context';
+import { DropdownContext } from './context';
 import DropdownWrap from './wrapper';
 import DropdownSelected from './selected';
 import DropdownList from './list';

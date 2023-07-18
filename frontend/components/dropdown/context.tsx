@@ -1,4 +1,4 @@
-import { createContext, useReducer } from 'react';
+import { createContext, useContext, useReducer } from 'react';
 import type { PropsWithChildren } from 'react';
 
 export interface StateType {
@@ -19,16 +19,20 @@ function reducer<T>(state: StateType, action: { type: string; payload: any }) {
   }
 }
 
-export const DropdownStateContext = createContext<StateType>(null);
+const StateContext = createContext<StateType>(null);
 
-export const DropdownDispatchContext = createContext(null);
+const DispatchContext = createContext(null);
 
-export default function DropdownContext({ children, initialState }: PropsWithChildren<{ initialState: StateType }>) {
+export function DropdownContext({ children, initialState }: PropsWithChildren<{ initialState: StateType }>) {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   return (
-    <DropdownStateContext.Provider value={state}>
-      <DropdownDispatchContext.Provider value={dispatch}>{children}</DropdownDispatchContext.Provider>
-    </DropdownStateContext.Provider>
+    <StateContext.Provider value={state}>
+      <DispatchContext.Provider value={dispatch}>{children}</DispatchContext.Provider>
+    </StateContext.Provider>
   );
 }
+
+export const useDropdownState = () => useContext(StateContext);
+
+export const useDropdownDispatch = () => useContext(DispatchContext);
