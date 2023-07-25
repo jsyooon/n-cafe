@@ -1,9 +1,9 @@
 'use client';
 
-import { type ChangeEvent } from 'react';
+import { useMutation } from '@tanstack/react-query';
+import ImageUpload from '@/components/imageUpload';
 import ProfileImage from '@/components/profileImage';
 import { fetchPost } from '@/helpers/fetch';
-import { AiOutlineCamera } from 'react-icons/ai';
 import styles from './style.module.scss';
 
 interface Props {
@@ -12,33 +12,23 @@ interface Props {
 }
 
 export default function ProfileUpload({ profileImage, onChange }: Props) {
-  const onChangeInput = async (event: ChangeEvent<HTMLInputElement>) => {
-    try {
-      const file = event.target.files[0];
+  const { mutate } = useMutation({ mutationFn: (body: FormData) => fetchPost('/upload/profile', { body }) });
 
-      const body = new FormData();
-      body.append('profile', file);
+  const onChangeImage = async (file: File) => {
+    const body = new FormData();
+    body.append('profile', file[0]);
 
-      const response = await fetchPost('/upload/profile', {
-        body,
-      });
-      if (response.data) {
+    mutate(body, {
+      onSuccess(response) {
         onChange(response.data);
-      }
-    } catch (error) {
-      console.error(error);
-    }
+      },
+    });
   };
 
   return (
     <div className={styles.profileUpload}>
-      <ProfileImage src={profileImage} size={120} />
-      <span className='upload-icon'>
-        <AiOutlineCamera size={20} />
-      </span>
-      <label>
-        <input type='file' hidden accept='image/*' onChange={onChangeInput} />
-      </label>
+      <ProfileImage src={profileImage} />
+      <ImageUpload onChange={onChangeImage} className={styles.imageUpload} />
     </div>
   );
 }

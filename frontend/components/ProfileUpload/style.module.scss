@@ -1,15 +1,14 @@
 .profileUpload {
   position: relative;
+  width: 120px;
+}
 
-  label {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    cursor: pointer;
-    z-index: 1;
-  }
+.imageUpload {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
 
   &:after {
     content: '';
