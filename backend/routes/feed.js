@@ -1,6 +1,6 @@
 const express = require('express');
 const { isAuth } = require('./middlewares');
-const { Feed, User } = require('../models');
+const { Feed } = require('../models');
 const router = express.Router();
 
 router.post('/', isAuth, async (req, res, next) => {
