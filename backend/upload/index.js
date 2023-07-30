@@ -7,7 +7,7 @@ const getMulter = (folder, options = {}) => {
   try {
     fs.accessSync(destination);
   } catch (error) {
-    fs.mkdirSync(destination);
+    fs.mkdirSync(destination, { recursive: true });
   }
 
   return multer({
