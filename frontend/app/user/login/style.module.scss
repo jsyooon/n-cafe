@@ -3,10 +3,12 @@
   max-width: 300px;
   margin-top: 5vh;
 
-  :global .button {
-    &.kakao {
-      background-color: #fee500;
-      color: #191919;
+  :global {
+    .button {
+      &.kakao {
+        background-color: #fee500;
+        color: #191919;
+      }
     }
   }
 }

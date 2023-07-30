@@ -40,7 +40,9 @@ export default function RootLayout({ children }: PropsWithChildren) {
             <RecoilRoot>
               <HydrateOnServer queryKey={USER_QUERY_KEY} queryFn={fetchUser(cookies().getAll())}>
                 <Header />
-                <section>{children}</section>
+                <section>
+                  <div className='container'>{children}</div>
+                </section>
                 <Toast />
               </HydrateOnServer>
             </RecoilRoot>
