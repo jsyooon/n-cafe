@@ -1,0 +1,30 @@
+.imageWrap {
+  display: grid;
+  gap: 0.5em;
+  max-width: 320px;
+
+  :global {
+    .image-item {
+      position: relative;
+      overflow: hidden;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 0.2em;
+      }
+
+      .delete-button {
+        position: absolute;
+        top: 0;
+        inset-inline-end: 0;
+        color: rgba(var(--black-color), 0.4);
+
+        svg {
+          transform: translate(25%, -25%);
+        }
+      }
+    }
+  }
+}

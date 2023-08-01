@@ -1,0 +1,84 @@
+.textareaWrap {
+  border: 1px solid rgba(var(--black-color), 0.2);
+  font-size: 0.9em;
+  border-radius: 0.2em;
+  padding: 0.8em 0.8em 0.6em;
+
+  :global {
+    .editable {
+      width: 100%;
+      box-sizing: border-box;
+      line-height: 1.5;
+      min-height: 3em;
+      overflow: hidden;
+      overflow-y: auto;
+      outline: 0;
+
+      &:before {
+        color: rgba(var(--black-color), 0.2);
+      }
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+
+      img {
+        display: block;
+      }
+    }
+
+    .button-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 0.5em;
+
+      .submit-button {
+        margin-left: auto;
+        background: rgb(var(--point-color));
+        color: rgb(var(--white-color));
+        font-size: 0.9em;
+        padding: 0.4em 0.8em;
+      }
+    }
+  }
+}
+
+.imageWrap {
+  display: grid;
+  gap: 0.5em;
+  max-width: 320px;
+
+  :global {
+    .image-item {
+      position: relative;
+      overflow: hidden;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 0.2em;
+      }
+
+      .delete-button {
+        position: absolute;
+        top: 0;
+        inset-inline-end: 0;
+        color: rgba(var(--black-color), 0.4);
+
+        svg {
+          transform: translate(25%, -25%);
+        }
+      }
+    }
+  }
+}
+
+.imageUpload {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(var(--black-color), 0.4);
+  padding: 0.2em 0.2em 0;
+}
