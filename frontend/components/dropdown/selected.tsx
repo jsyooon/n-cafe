@@ -10,7 +10,7 @@ export default function DropdownSelected({ children }: PropsWithChildren) {
   const onClickSelected = () => dispatch({ type: 'toggle', payload: !isOpen });
 
   return (
-    <button type='button' onClick={onClickSelected}>
+    <button type='button' className='selected' onClick={onClickSelected}>
       {children}
     </button>
   );

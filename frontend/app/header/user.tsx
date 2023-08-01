@@ -6,7 +6,9 @@ import ProfileImage from '@/components/profileImage';
 import { Dropdown, DropdownSelected, DropdownList } from '@/components/dropdown';
 import { USER_QUERY_KEY } from '@/queries/useUserQuery';
 import { fetchPost } from '@/helpers/fetch';
+import { BiMessageSquareAdd } from 'react-icons/bi';
 import type { UserType } from '@/types/user';
+import styles from './style.module.scss';
 
 export default function User({ user }: { user: UserType }) {
   const { mutate } = useMutation({ mutationFn: () => fetchPost('/user/logout') });
@@ -21,7 +23,10 @@ export default function User({ user }: { user: UserType }) {
   };
 
   return (
-    <>
+    <div className={styles.userWrap}>
+      <Link href='/write' className='write-button'>
+        <BiMessageSquareAdd size={24} />
+      </Link>
       <Dropdown inset='end'>
         <DropdownSelected>
           <ProfileImage src={user.profileImage} />
@@ -33,6 +38,6 @@ export default function User({ user }: { user: UserType }) {
           </button>
         </DropdownList>
       </Dropdown>
-    </>
+    </div>
   );
 }

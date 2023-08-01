@@ -15,18 +15,29 @@
       justify-content: space-between;
       align-items: center;
     }
+  }
 
-    .user-wrap {
-      width: 36px;
-      height: 36px;
+  .userWrap {
+    display: flex;
+    align-items: center;
+    height: 36px;
 
-      .login-button {
-        display: flex;
-        width: 100%;
-        height: 100%;
-        align-items: center;
-        justify-content: center;
+    :global {
+      .selected {
+        width: 36px;
+      }
+
+      .write-button {
+        margin-inline-end: 1em;
       }
     }
+  }
+
+  .loginButton {
+    display: flex;
+    width: 36px;
+    height: 36px;
+    align-items: center;
+    justify-content: center;
   }
 }
