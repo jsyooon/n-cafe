@@ -14,7 +14,8 @@ module.exports = (sequelize, DataTypes) => {
   );
 
   Feed.associate = (models) => {
-    Feed.belongsTo(models.User, { foreignKey: 'userId', sourceKey: 'id' });
+    Feed.hasMany(models.FeedImage, { foreignKey: 'feedId', sourceKey: 'id' });
+    Feed.belongsTo(models.User, { foreignKey: 'userId', targetKey: 'id' });
   };
 
   return Feed;
