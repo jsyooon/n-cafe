@@ -6,11 +6,11 @@ module.exports = (sequelize, DataTypes) => {
     },
     width: {
       type: DataTypes.INTEGER.UNSIGNED,
-      allowNull: false,
+      allowNull: true,
     },
     height: {
       type: DataTypes.INTEGER.UNSIGNED,
-      allowNull: false,
+      allowNull: true,
     },
   });
 
