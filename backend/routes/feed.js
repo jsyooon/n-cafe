@@ -1,4 +1,5 @@
 const express = require('express');
+const { Op } = require('sequelize');
 const { isAuth } = require('./middlewares');
 const { Feed } = require('../models');
 const { FeedImage } = require('../models');
@@ -13,9 +14,9 @@ router.post('/', isAuth, async (req, res, next) => {
 
     if (req.body.images) {
       await Promise.allSettled(
-        req.body.images.map((src) =>
+        req.body.images.map((data) =>
           FeedImage.create({
-            src,
+            ...data,
             feedId: feed.id,
           })
         )
