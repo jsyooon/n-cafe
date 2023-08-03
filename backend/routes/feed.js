@@ -30,4 +30,27 @@ router.post('/', isAuth, async (req, res, next) => {
   }
 });
 
+router.get('/all', async (req, res, next) => {
+  try {
+    const feeds = await Feed.findAll({
+      limit: 15,
+      offset: req.query.offset ?? 0,
+      order: [
+        ['createdAt', 'DESC'],
+        [FeedImage, 'id', 'ASC'],
+      ],
+      include: [
+        {
+          model: FeedImage,
+          attributes: ['url', 'width', 'height'],
+        },
+      ],
+    });
+    res.status(200).json(feeds);
+  } catch (error) {
+    console.error(error);
+    next(error);
+  }
+});
+
 module.exports = router;
