@@ -17,24 +17,22 @@ router.post('/profile', profileUpload.single('profile'), (req, res, next) => {
 
 router.post('/feed', isAuth, feedUpload.array('images', 10), async (req, res, next) => {
   try {
-    const data = await Promise.allSettled(
-      req.files.map(async ({ path }) => {
-        const metadata = await sharp(path).metadata();
-        return {
-          url: getFilePath(path),
-          width: metadata.width,
-          height: metadata.height,
-        };
-      })
-    );
-    return res.status(201).send(
-      data.map(({ status, ...result }) => {
-        if (status === 'fulfilled') return result.value;
-        return { error: result.reason };
-      })
-    );
+    return res.status(201).send(req.files.map(({ path }) => getFilePath(path)));
   } catch (error) {
     return res.status(500).send('잠시 후 다시 시도해 주세요.');
+  }
+});
+
+router.get('/metadata', async (req, res, next) => {
+  try {
+    const path = req.query.path.replace(/^\//, '');
+    const { width, height } = await sharp(path).metadata();
+    return res.status(200).send({
+      width,
+      height,
+    });
+  } catch (error) {
+    next(error);
   }
 });
 
