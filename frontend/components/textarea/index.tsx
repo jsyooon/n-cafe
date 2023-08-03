@@ -5,7 +5,7 @@ import { useMutation } from '@tanstack/react-query';
 import Button from '@/components/button';
 import ImageUpload from '@/components/imageUpload';
 import { fetchPost } from '@/helpers/fetch';
-import type { FeedImageArray, FeedPayloadType } from '@/types/feed';
+import type { FeedImageArray, FeedImage, FeedPayloadType } from '@/types/feed';
 import styles from './style.module.scss';
 
 interface Props {
@@ -15,10 +15,10 @@ interface Props {
 }
 
 export default function Textarea({ placeholder, initialText = '', onSubmit }: Props) {
-  const { mutate: uploadImageMutate } = useMutation({ mutationFn: (body: FormData) => fetchPost<FeedImageArray>('/upload/feed', { body }) });
+  const { mutate: uploadImageMutate } = useMutation({ mutationFn: (body: FormData) => fetchPost<Array<FeedImage['url']>>('/upload/feed', { body }) });
 
   const textarea = useRef<HTMLDivElement>();
-  const [images, setImages] = useState<Array<string>>([]);
+  const [images, setImages] = useState<FeedImageArray>([]);
   const [selectRange, setSelectRange] = useState<Range>();
 
   const onClickSubmit = () => {
@@ -36,14 +36,15 @@ export default function Textarea({ placeholder, initialText = '', onSubmit }: Pr
 
   const onChangeImage = (fileList: FileList) => {
     const body = new FormData();
+
     for (let file of fileList) {
       body.append('images', file);
     }
 
     uploadImageMutate(body, {
       onSuccess({ data }) {
-        for (let { url } of data) {
-          setImages((prev) => [...prev, url]);
+        for (let url of data) {
+          setImages((prev) => [...prev, { url }]);
           const image = new Image();
           image.src = url;
           if (selectRange) {
