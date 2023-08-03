@@ -5,7 +5,7 @@ import { useMutation } from '@tanstack/react-query';
 import Button from '@/components/button';
 import ImageUpload from '@/components/imageUpload';
 import { fetchPost } from '@/helpers/fetch';
-import type { FeedImageArray, FeedImage, FeedPayloadType } from '@/types/feed';
+import type { FeedImageList, FeedImage, FeedPayloadType } from '@/types/feed';
 import styles from './style.module.scss';
 
 interface Props {
@@ -18,7 +18,7 @@ export default function Textarea({ placeholder, initialText = '', onSubmit }: Pr
   const { mutate: uploadImageMutate } = useMutation({ mutationFn: (body: FormData) => fetchPost<Array<FeedImage['url']>>('/upload/feed', { body }) });
 
   const textarea = useRef<HTMLDivElement>();
-  const [images, setImages] = useState<FeedImageArray>([]);
+  const [images, setImages] = useState<FeedImageList>([]);
   const [selectRange, setSelectRange] = useState<Range>();
 
   const onClickSubmit = () => {

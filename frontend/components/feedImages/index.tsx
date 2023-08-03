@@ -1,9 +1,9 @@
-import type { FeedImageArray } from '@/types/feed';
+import type { FeedImageList } from '@/types/feed';
 import styles from './styles.module.scss';
 import { useEffect, useState } from 'react';
 
 interface Props {
-  images?: FeedImageArray;
+  images?: FeedImageList;
 }
 
 export default function FeedImages({ images }: Props) {

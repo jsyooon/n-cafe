@@ -1,12 +1,11 @@
 export interface FeedPayloadType {
   content: string;
-  images?: FeedImageArray;
+  images?: FeedImageList;
 }
-
 export interface FeedImage {
   url: string;
   width?: number;
   height?: number;
 }
 
-export type FeedImageArray = Array<FeedImage>;
+export type FeedImageList = Array<FeedImage>;
