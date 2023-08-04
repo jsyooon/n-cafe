@@ -6,7 +6,7 @@ import StyledJsxRegistry from '@/app/registry';
 import ReactQueryProvider from '@/app/react-query-provider';
 import RecoilRoot from '@/app/recoil-root';
 import HydrateOnServer from '@/app/hydrate-on-server';
-import { USER_QUERY_KEY, fetchUser } from '@/queries/useUserQuery';
+import { USER_QUERY_KEY, fetchUserOnServer } from '@/queries/useUserQuery';
 import Toast from '@/components/toast';
 import type { PropsWithChildren } from 'react';
 import '@/styles/global.scss';
@@ -38,7 +38,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
         <main id='app'>
           <ReactQueryProvider>
             <RecoilRoot>
-              <HydrateOnServer queryKey={USER_QUERY_KEY} queryFn={fetchUser(cookies().getAll())}>
+              <HydrateOnServer queryKey={USER_QUERY_KEY} queryFn={() => fetchUserOnServer(cookies().getAll())}>
                 <Header />
                 <section>
                   <div className='container'>{children}</div>

@@ -5,12 +5,10 @@ import { type CookieItemType } from '@/types/fetch';
 
 export const USER_QUERY_KEY = ['user'] as const;
 
-let fetchUserPromise: () => Promise<UserType>;
+const fetchUser = (cookie?: CookieItemType) => fetchGet<UserType>('/user', cookie ? { cookie } : {}).then((response) => response?.data);
 
-export const fetchUser = (cookie?: CookieItemType) => {
-  if (cookie) fetchUserPromise = null;
-  fetchUserPromise ??= () => fetchGet<UserType>('/user', { cookie }).then((response) => response?.data);
-  return fetchUserPromise;
-};
+export const fetchUserOnClient = () => fetchUser();
 
-export const useUserQuery = () => useQuery({ queryKey: USER_QUERY_KEY, queryFn: fetchUser(), refetchOnMount: false });
+export const fetchUserOnServer = (cookie: CookieItemType) => fetchUser(cookie);
+
+export const useUserQuery = () => useQuery({ queryKey: USER_QUERY_KEY, queryFn: fetchUserOnClient, refetchOnMount: false });
