@@ -9,3 +9,23 @@ export interface FeedImage {
 }
 
 export type FeedImageList = Array<FeedImage>;
+
+export interface WriterType {
+  id: number;
+  name: string;
+  profileImage: string;
+}
+
+export interface FeedItem {
+  id: number;
+  images: FeedImageList;
+  createdAt: string;
+  updatedAt: string;
+  writer: WriterType;
+}
+
+export interface FeedPreviewItem extends FeedItem {
+  summary: string;
+}
+
+export type FeedPreviewList = Array<FeedPreviewItem>;
