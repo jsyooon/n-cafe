@@ -3,9 +3,9 @@
 import { AiOutlineUser } from 'react-icons/ai';
 import styles from './style.module.scss';
 
-export default function ProfileImage({ src, size }: { src?: string; size?: number }) {
+export default function ProfileImage({ src, size }: { src: string; size?: number }) {
   return (
-    <span className={styles.profile}>
+    <span className={`${styles.profile} profile-image`}>
       {src ? <img src={src} /> : <AiOutlineUser />}
       <style jsx>{`
         span {
