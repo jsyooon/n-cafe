@@ -1,8 +1,8 @@
 const express = require('express');
-const { Op } = require('sequelize');
 const { isAuth } = require('./middlewares');
-const { Feed } = require('../models');
+const { Feed, User } = require('../models');
 const { FeedImage } = require('../models');
+const { processFeedPreview } = require('../helpers/processFeed');
 const router = express.Router();
 
 router.post('/', isAuth, async (req, res, next) => {
@@ -44,9 +44,13 @@ router.get('/all', async (req, res, next) => {
           model: FeedImage,
           attributes: ['url', 'width', 'height'],
         },
+        {
+          model: User,
+          attributes: ['id', 'name', 'profileImage'],
+        },
       ],
     });
-    res.status(200).json(feeds);
+    res.status(200).json(feeds.map((feed) => processFeedPreview(feed.toJSON(), req?.user?.id)));
   } catch (error) {
     console.error(error);
     next(error);
