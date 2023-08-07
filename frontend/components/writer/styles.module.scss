@@ -1,0 +1,15 @@
+.writerWrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+
+  :global {
+    .profile-image {
+      height: 42px;
+    }
+
+    .name {
+      color: rgba(var(--black-color), 0.7);
+    }
+  }
+}
