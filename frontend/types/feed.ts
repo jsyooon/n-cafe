@@ -18,6 +18,7 @@ export interface WriterType {
 
 export interface FeedItem {
   id: number;
+  isMine: boolean;
   images: FeedImageList;
   createdAt: string;
   updatedAt: string;
