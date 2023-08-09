@@ -11,13 +11,14 @@
   border-radius: 0.2em;
   background-color: rgb(var(--white-color));
   white-space: nowrap;
+  font-size: 0.8rem;
   overflow: hidden;
 
   > * {
     text-align: left;
     line-height: 1;
-    font-size: 0.8em;
-    color: rgba(var(--black-color), 0.9);
+    color: rgba(var(--black-color), 0.7);
+    font-size: inherit;
     padding: 1em 2em;
 
     &:hover {

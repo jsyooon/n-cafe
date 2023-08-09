@@ -3,6 +3,7 @@ import type { PropsWithChildren } from 'react';
 
 export interface StateType {
   inset: 'start' | 'end';
+  className?: string;
   isOpen: boolean;
 }
 
