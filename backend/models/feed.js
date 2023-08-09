@@ -3,7 +3,7 @@ module.exports = (sequelize, DataTypes) => {
     'Feed',
     {
       content: {
-        type: DataTypes.STRING(2000),
+        type: DataTypes.STRING(10000),
         allowNull: false,
       },
     },
