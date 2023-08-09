@@ -27,7 +27,7 @@ export default function User({ user }: { user: UserType }) {
       <Link href='/write' className='write-button'>
         <LuEdit3 size={24} />
       </Link>
-      <Dropdown inset='end'>
+      <Dropdown inset='end' className='profile'>
         <DropdownSelected>
           <ProfileImage src={user.profileImage} />
         </DropdownSelected>

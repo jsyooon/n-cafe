@@ -3,6 +3,7 @@
   top: 0;
   z-index: 100;
   border-bottom: 1px solid rgba(var(--black-color), 0.1);
+  background: rgb(var(--white-color));
 
   h1 {
     font-size: 1.5em;
@@ -23,7 +24,7 @@
     height: 36px;
 
     :global {
-      .selected {
+      .profile .selected {
         width: 36px;
       }
 
