@@ -1,12 +1,13 @@
 .imageWrap {
   display: grid;
   gap: 0.5em;
-  max-width: 320px;
+  max-width: 480px;
 
   :global {
     .image-item {
       position: relative;
       overflow: hidden;
+      cursor: pointer;
 
       img {
         width: 100%;
