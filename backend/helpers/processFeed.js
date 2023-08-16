@@ -1,9 +1,19 @@
-exports.processFeedPreview = ({ FeedImages, User, userId, content, ...item }, reqUserId) => {
+const processFeed = ({ User, userId, ...rest }, reqUserId) => {
   return {
-    ...item,
+    ...rest,
     isMine: reqUserId === userId,
-    summary: content.replaceAll(/(<img([^>]+)\/?>|<br\s?\/?>)/g, ''),
-    images: FeedImages,
+
     writer: User,
   };
+};
+
+const processFeedPreview = ({ content, FeedImages, ...feed }, reqUserId) => ({
+  ...processFeed(feed, reqUserId),
+  images: FeedImages,
+  summary: content.replaceAll(/(<img([^>]+)\/?>|<br\s?\/?>)/g, ''),
+});
+
+module.exports = {
+  processFeedPreview,
+  processFeed,
 };
