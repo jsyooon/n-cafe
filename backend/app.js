@@ -8,6 +8,7 @@ const loginRouter = require('./routes/login');
 const oauthRouter = require('./routes/oauth');
 const userRouter = require('./routes/user');
 const feedRouter = require('./routes/feed');
+const feedsRouter = require('./routes/feeds');
 const uploadRouter = require('./routes/upload');
 const passportConfig = require('./passport/index');
 const { FRONT_DOMAIN } = require('./config/const');
@@ -45,6 +46,7 @@ app.use('/login', loginRouter);
 app.use('/oauth', oauthRouter);
 app.use('/user', userRouter);
 app.use('/feed', feedRouter);
+app.use('/feeds', feedsRouter);
 app.use('/upload', uploadRouter);
 
 app.listen(3100, () => {
