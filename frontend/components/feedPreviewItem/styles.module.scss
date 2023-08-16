@@ -1,0 +1,13 @@
+.feedBody {
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  text-overflow: ellipsis;
+  -webkit-box-orient: vertical;
+  line-height: 1.5em;
+  max-height: 6em;
+  overflow: hidden;
+
+  + div {
+    margin-top: 1.5em;
+  }
+}
