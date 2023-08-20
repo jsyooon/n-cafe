@@ -25,7 +25,7 @@ const getCookie = (cookie?: CookieItemType): RequestInit['headers'] => {
   return {};
 };
 
-const getHeaderWithBody = (options?: FetchOptionType) => {
+const getHeader = (options?: FetchOptionType) => {
   const result = {
     headers: { ...getCookie(options?.cookie) },
     ...(options?.body ? { body: options.body } : null),
@@ -80,9 +80,13 @@ export const fetchGet = <T = string>(url: string, options?: FetchOptionType) => 
 };
 
 export const fetchPost = <T = string>(url: string, options?: FetchOptionType) => {
-  return fetchCommon<T>(url, { method: 'POST', ...getHeaderWithBody(options) });
+  return fetchCommon<T>(url, { method: 'POST', ...getHeader(options) });
 };
 
 export const fetchPut = <T = string>(url: string, options?: FetchOptionType) => {
-  return fetchCommon<T>(url, { method: 'PUT', ...getHeaderWithBody(options) });
+  return fetchCommon<T>(url, { method: 'PUT', ...getHeader(options) });
+};
+
+export const fetcher = <T = string>(url: string, method: 'GET' | 'POST' | 'PUT' | 'DELETE' = 'GET', options?: FetchOptionType) => {
+  return fetchCommon<T>(url, { method, ...getHeader(options) });
 };
