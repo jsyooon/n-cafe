@@ -23,7 +23,75 @@ router.post('/', isAuth, async (req, res, next) => {
       );
     }
 
-    return res.status(201).json(feed);
+    return res.status(201).send('OK');
+  } catch (error) {
+    console.error(error);
+    next(error);
+  }
+});
+
+router.put('/:id', async (req, res, next) => {
+  try {
+    const feedId = req.params.id;
+
+    const updateFeed = async () => {
+      await Feed.update(
+        { content: req.body.content },
+        {
+          where: { id: feedId },
+        }
+      );
+    };
+
+    const updateImages = async () => {
+      const originImages = await FeedImage.findAll({
+        where: { feedId: feedId },
+        order: [['createdAt', 'ASC']],
+      });
+
+      function* replaceImage() {
+        let i = 0;
+        while (req.body.images[i] || originImages[i]) {
+          yield {
+            added: req.body.images[i],
+            original: originImages[i],
+          };
+
+          i++;
+        }
+
+        return;
+      }
+
+      for (let replacement of replaceImage()) {
+        const { added, original } = replacement;
+        if (added && !original) {
+          FeedImage.create({
+            ...added,
+            feedId,
+          });
+          continue;
+        }
+
+        if (!added && original) {
+          FeedImage.destroy({
+            where: { id: original.id },
+          });
+          continue;
+        }
+
+        FeedImage.update(
+          {
+            ...added,
+          },
+          { where: { id: original.id } }
+        );
+      }
+    };
+
+    const response = await Promise.allSettled([updateFeed(), updateImages()]);
+    console.log(response);
+    return res.status(200).send('OK');
   } catch (error) {
     console.error(error);
     next(error);
@@ -34,10 +102,15 @@ router.get('/:id', async (req, res, next) => {
   try {
     const feed = await Feed.findOne({
       where: { id: req.params.id },
+      order: [[FeedImage, 'id', 'ASC']],
       include: [
         {
           model: User,
           attributes: ['id', 'name', 'profileImage'],
+        },
+        {
+          model: FeedImage,
+          attributes: ['url', 'width', 'height'],
         },
       ],
     });
