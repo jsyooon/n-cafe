@@ -1,15 +1,14 @@
-const processFeed = ({ User, userId, ...rest }, reqUserId) => {
+const processFeed = ({ User, userId, FeedImages, ...rest }, reqUserId) => {
   return {
     ...rest,
     isMine: reqUserId === userId,
-
+    images: FeedImages,
     writer: User,
   };
 };
 
-const processFeedPreview = ({ content, FeedImages, ...feed }, reqUserId) => ({
+const processFeedPreview = ({ content, ...feed }, reqUserId) => ({
   ...processFeed(feed, reqUserId),
-  images: FeedImages,
   summary: content.replaceAll(/(<img([^>]+)\/?>|<br\s?\/?>)/g, ''),
 });
 
