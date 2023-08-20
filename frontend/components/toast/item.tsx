@@ -1,8 +1,8 @@
 'use client';
 
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { AiOutlineClose } from 'react-icons/ai/index';
-import { BsFillCheckCircleFill } from 'react-icons/bs/index';
+import { AiOutlineClose } from 'react-icons/ai';
+import { BsFillCheckCircleFill } from 'react-icons/bs';
 import { useSetRecoilState } from 'recoil';
 import { toastListState } from '@/atom';
 import type { ToastConfig, ToastType } from '@/types/toast';

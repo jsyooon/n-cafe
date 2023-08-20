@@ -2,8 +2,8 @@ import Writer from '@/components/writer';
 import { Dropdown, DropdownSelected, DropdownList } from '@/components/dropdown';
 import { FiMoreHorizontal } from 'react-icons/fi';
 import type { WriterType } from '@/types/feed';
-import styles from './styles.module.scss';
 import type { PropsWithChildren } from 'react';
+import styles from './styles.module.scss';
 
 interface Props {
   writer: WriterType;

@@ -1,4 +1,4 @@
-import { AiOutlineCamera } from 'react-icons/ai/index';
+import { AiOutlineCamera } from 'react-icons/ai';
 import type { ChangeEvent } from 'react';
 import styles from './style.module.scss';
 
