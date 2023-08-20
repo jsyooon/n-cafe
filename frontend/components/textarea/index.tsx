@@ -5,29 +5,33 @@ import { useMutation } from '@tanstack/react-query';
 import Button from '@/components/button';
 import ImageUpload from '@/components/imageUpload';
 import { fetchPost } from '@/helpers/fetch';
-import type { FeedImageList, FeedImage, FeedPayloadType } from '@/types/feed';
+import type { FeedImageList, FeedImage, FeedPayloadType, FeedItem } from '@/types/feed';
 import styles from './style.module.scss';
 
 interface Props {
   placeholder?: string;
-  initialText?: string;
+  initialContent?: string;
   onSubmit: (payload: FeedPayloadType) => any;
 }
 
-export default function Textarea({ placeholder, initialText = '', onSubmit }: Props) {
+export default function Textarea({ placeholder, initialContent, onSubmit }: Props) {
   const { mutate: uploadImageMutate } = useMutation({ mutationFn: (body: FormData) => fetchPost<Array<FeedImage['url']>>('/upload/feed', { body }) });
 
   const textarea = useRef<HTMLDivElement>();
-  const [images, setImages] = useState<FeedImageList>([]);
+  const [uploadImages, setUploadImages] = useState<FeedImageList>([]);
   const [selectRange, setSelectRange] = useState<Range>();
 
   const onClickSubmit = () => {
-    onSubmit({ images, content: textarea.current.innerHTML });
+    const attatchedImages = Array.from(textarea.current.querySelectorAll('img')).map<FeedImage>((element: HTMLImageElement) => ({ url: element.src }));
+
+    onSubmit({ images: attatchedImages?.length ? attatchedImages : uploadImages, content: textarea.current.innerHTML });
   };
 
   useEffect(() => {
-    textarea.current.innerHTML = initialText;
-  }, [initialText]);
+    if (initialContent) {
+      textarea.current.innerHTML = initialContent;
+    }
+  }, [initialContent]);
 
   const onSelect = () => {
     const select = getSelection();
@@ -44,7 +48,7 @@ export default function Textarea({ placeholder, initialText = '', onSubmit }: Pr
     uploadImageMutate(body, {
       onSuccess({ data }) {
         for (let url of data) {
-          setImages((prev) => [...prev, { url }]);
+          setUploadImages((prev) => [...prev, { url }]);
           const image = new Image();
           image.src = url;
           if (selectRange) {
