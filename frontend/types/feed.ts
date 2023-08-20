@@ -16,16 +16,20 @@ export interface WriterType {
   profileImage: string;
 }
 
-export interface FeedItem {
+export interface FeedItemCommon {
   id: number;
   isMine: boolean;
-  images: FeedImageList;
   createdAt: string;
   updatedAt: string;
+  images?: FeedImageList;
   writer: WriterType;
 }
 
-export interface FeedPreviewItem extends FeedItem {
+export interface FeedItem extends FeedItemCommon {
+  content: string;
+}
+
+export interface FeedPreviewItem extends FeedItemCommon {
   summary: string;
 }
 
