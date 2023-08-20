@@ -1,7 +1,12 @@
 .imageWrap {
+  position: relative;
+}
+
+.feedImages {
+  position: relative;
   display: grid;
-  gap: 0.5em;
   max-width: 480px;
+  gap: 0.5em;
 
   :global {
     .image-item {
@@ -25,6 +30,24 @@
         svg {
           transform: translate(25%, -25%);
         }
+      }
+    }
+
+    .more {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      inset-inline-end: 0.5em;
+      inset-block-end: 0.5em;
+      background: rgba(var(--black-color), 0.8);
+      color: rgb(var(--white-color));
+      font-size: 0.7em;
+      border-radius: 0.2em;
+      padding: 0.25em 0.5em;
+
+      svg {
+        margin-inline-end: 0.3em;
       }
     }
   }
