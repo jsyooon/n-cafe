@@ -7,5 +7,5 @@ export default async function Write({ searchParams: { feedId } }) {
   const feedItem = feedId ? await fetchFeedItem(feedId, cookies().getAll()) : null;
   if (feedItem && !feedItem.isMine) redirect('/error/401');
 
-  return <Editor data={{ id: feedId, content: feedItem?.content, images: feedItem?.images }} />;
+  return <Editor data={feedItem} />;
 }

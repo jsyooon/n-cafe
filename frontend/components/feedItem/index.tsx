@@ -4,13 +4,13 @@ import type { FeedPreviewItem } from '@/types/feed';
 import styles from './styles.module.scss';
 
 interface Props {
-  item: FeedPreviewItem;
+  data: FeedPreviewItem;
 }
 
-export default function FeedItem({ item, children }: PropsWithChildren<Props>) {
+export default function FeedItem({ data, children }: PropsWithChildren<Props>) {
   return (
     <div className={styles.feedItem}>
-      <FeedHeader item={item} />
+      <FeedHeader data={data} />
       {children}
     </div>
   );

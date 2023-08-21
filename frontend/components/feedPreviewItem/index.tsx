@@ -4,14 +4,16 @@ import type { FeedPreviewItem } from '@/types/feed';
 import styles from './styles.module.scss';
 
 interface Props {
-  item: FeedPreviewItem;
+  data: FeedPreviewItem;
 }
 
-export default function FeedPreviewItem({ item }: Props) {
+export default function FeedPreviewItem({ data }: Props) {
+  const onClickFeed = () => {};
+
   return (
-    <FeedItem item={item}>
-      <div dangerouslySetInnerHTML={{ __html: item.summary }} className={styles.feedBody}></div>
-      {item.images?.length > 0 && <FeedImages images={item.images} />}
+    <FeedItem data={data}>
+      <div dangerouslySetInnerHTML={{ __html: data.summary }} className={styles.feedBody} onClick={onClickFeed}></div>
+      {data.images?.length > 0 && <FeedImages images={data.images} />}
     </FeedItem>
   );
 }

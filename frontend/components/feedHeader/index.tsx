@@ -3,15 +3,15 @@ import ArticleHeader from '@/components/articleHeader';
 import type { FeedItem } from '@/types/feed';
 
 interface Props {
-  item: FeedItem;
+  data: Pick<FeedItem, 'id' | 'isMine' | 'writer' | 'createdAt'>;
 }
 
-export default function FeedHeader({ item }: Props) {
+export default function FeedHeader({ data }: Props) {
   return (
-    <ArticleHeader writer={item.writer} createdAt={item.createdAt}>
-      {item.isMine ? (
+    <ArticleHeader writer={data.writer} createdAt={data.createdAt}>
+      {data.isMine ? (
         <>
-          <Link href={`/write?feedId=${item.id}`}>수정</Link>
+          <Link href={`/write?feedId=${data.id}`}>수정</Link>
           <button type='button'>삭제</button>
           <button type='button'>공유</button>
         </>
