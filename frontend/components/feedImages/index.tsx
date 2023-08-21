@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react';
+import useImageViewer from '@/hooks/useImageViewer';
+import { BsImage } from 'react-icons/bs';
 import type { FeedImageList } from '@/types/feed';
 import styles from './styles.module.scss';
-import { BsImage } from 'react-icons/bs';
 
 interface Props {
   images: FeedImageList;
@@ -12,13 +12,10 @@ export default function FeedImages({ images }: Props) {
 
   const THUMBNAIL_LENGTH = 4;
 
-  const [imageType, setImageType] = useState<number>();
-
   const thumbnailLength = Math.min(images.length, THUMBNAIL_LENGTH);
+  const imageType = +(images[0].width < images[0].height);
 
-  useEffect(() => {
-    setImageType(+(images[0].width < images[0].height));
-  }, [images]);
+  const viewImage = useImageViewer(images);
 
   return (
     <>
@@ -45,8 +42,8 @@ export default function FeedImages({ images }: Props) {
             `}
           </style>
 
-          {images.slice(0, THUMBNAIL_LENGTH).map(({ url }, i) => (
-            <div key={`${i}-${url.slice(url.lastIndexOf('/') + 1)}`} className='image-item'>
+          {images.slice(0, THUMBNAIL_LENGTH).map(({ url }, index) => (
+            <div key={`${index}-${url.slice(url.lastIndexOf('/') + 1)}`} className='image-item' onClick={() => viewImage(index)}>
               <img src={url} alt='' />
             </div>
           ))}
