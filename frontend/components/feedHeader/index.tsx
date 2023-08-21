@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import ArticleHeader from '@/components/articleHeader';
 import type { FeedItem } from '@/types/feed';
 
@@ -10,7 +11,7 @@ export default function FeedHeader({ item }: Props) {
     <ArticleHeader writer={item.writer} createdAt={item.createdAt}>
       {item.isMine ? (
         <>
-          <button type='button'>수정</button>
+          <Link href={`/write?feedId=${item.id}`}>수정</Link>
           <button type='button'>삭제</button>
           <button type='button'>공유</button>
         </>
