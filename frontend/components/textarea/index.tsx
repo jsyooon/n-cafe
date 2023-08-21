@@ -5,7 +5,7 @@ import { useMutation } from '@tanstack/react-query';
 import Button from '@/components/button';
 import ImageUpload from '@/components/imageUpload';
 import { fetchPost } from '@/helpers/fetch';
-import type { FeedImageList, FeedImage, FeedPayloadType, FeedItem } from '@/types/feed';
+import type { FeedImageList, FeedImage, FeedPayloadType } from '@/types/feed';
 import styles from './style.module.scss';
 
 interface Props {
@@ -35,7 +35,7 @@ export default function Textarea({ placeholder, initialContent, onSubmit }: Prop
 
   const onSelect = () => {
     const select = getSelection();
-    setSelectRange(select.getRangeAt(0));
+    if (select) setSelectRange(select?.getRangeAt(0));
   };
 
   const onChangeImage = (fileList: FileList) => {
