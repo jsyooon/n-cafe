@@ -1,11 +1,17 @@
 .feedBody {
-  display: -webkit-box;
-  -webkit-line-clamp: 4;
-  text-overflow: ellipsis;
-  -webkit-box-orient: vertical;
-  line-height: 1.5em;
-  max-height: 6em;
-  overflow: hidden;
+  cursor: pointer;
+
+  :global {
+    .summary {
+      line-height: 1.5em;
+      max-height: 6em;
+      overflow: hidden;
+    }
+
+    .more {
+      color: rgba(var(--black-color), 0.4);
+    }
+  }
 
   + div {
     margin-top: 1.5em;
