@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, type UseQueryOptions } from '@tanstack/react-query';
 import { fetcher } from '@/helpers/fetch';
 import type { CookieItemType } from '@/types/fetch';
 import type { FeedItem, FeedPreviewList } from '@/types/feed';
@@ -17,6 +17,9 @@ export const useFeedListQuery = () => useQuery({ queryKey: FEEDS_LIST_QUERY_KEY,
 
 /* Feed Item */
 
-export const FEEDS_ITEM_QUERY_KEY = ['feedItem'] as const;
+export const getFeedItemQueryKey = (id: FeedItem['id']) => ['feedItem', id];
 
-export const fetchFeedItem = (id: string, cookie?: CookieItemType) => fetcher<FeedItem>(`/feed/${id}`, 'GET', cookie ? { cookie } : {}).then((response) => response?.data);
+export const fetchFeedItem = (id: FeedItem['id'], cookie?: CookieItemType) => fetcher<FeedItem>(`/feed/${id}`, 'GET', cookie ? { cookie } : {}).then((response) => response?.data);
+
+export const useFeedItemQuery = (id: FeedItem['id'], options?: Omit<UseQueryOptions<FeedItem>, 'queryKey' | 'queryFn'>) =>
+  useQuery({ queryKey: getFeedItemQueryKey(id), queryFn: () => fetchFeedItem(id), ...options });
