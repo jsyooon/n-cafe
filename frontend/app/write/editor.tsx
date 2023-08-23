@@ -1,20 +1,23 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import TextareaComponent from '@/components/textarea';
 import { fetchGet, fetcher } from '@/helpers/fetch';
+import { getFeedItemQueryKey, useFeedItemQuery } from '@/queries/useFeedQuery';
 import type { FeedImage, FeedItem, FeedPayloadType } from '@/types/feed';
 import styles from './style.module.scss';
 
 interface Props {
-  data: Pick<FeedItem, 'id' | 'images' | 'content'>;
+  data: FeedItem;
   content?: string;
   feedId?: string;
 }
 
 export default function Editor({ data }: Props) {
   const router = useRouter();
+  const queryClient = useQueryClient();
+  if (data) useFeedItemQuery(data.id, { initialData: data });
 
   const { mutate: submitMutate } = useMutation({
     mutationFn: (body: FeedPayloadType) => {
@@ -40,6 +43,7 @@ export default function Editor({ data }: Props) {
 
       submitMutate(payload, {
         onSuccess() {
+          queryClient.invalidateQueries(getFeedItemQueryKey(data.id));
           router.push('/');
         },
       });
