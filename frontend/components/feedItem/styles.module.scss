@@ -3,3 +3,19 @@
   border-radius: 0.2em;
   padding: 1.2em;
 }
+
+.footer {
+  display: flex;
+  align-items: center;
+  margin-top: 2em;
+}
+
+.commentCount {
+  color: rgba(var(--black-color), 0.7);
+  font-size: 0.85em;
+
+  em {
+    font-style: normal;
+    margin-inline-start: 0.3em;
+  }
+}
