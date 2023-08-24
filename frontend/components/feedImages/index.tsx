@@ -13,7 +13,7 @@ export default function FeedImages({ images }: Props) {
   const THUMBNAIL_LENGTH = 4;
 
   const thumbnailLength = Math.min(images.length, THUMBNAIL_LENGTH);
-  const imageType = +(images[0].width < images[0].height);
+  const imageType = +(images[0].width <= images[0].height);
 
   const viewImage = useImageViewer(images);
 
@@ -29,14 +29,15 @@ export default function FeedImages({ images }: Props) {
                   thumbnailLength > 2
                     ? `
                 aspect-ratio: 10 / 9;
-                grid-template-${GRID_TYPE[GRID_TYPE.length - (imageType + 1)]}: repeat(2, 1fr);
-                grid-template-${GRID_TYPE.at(imageType * -1)}: repeat(${thumbnailLength - 1}, 1fr);
+                grid-template-${GRID_TYPE[GRID_TYPE.length - (imageType + 1)]}: repeat(${thumbnailLength - 1}, 1fr);
+                grid-template-${GRID_TYPE.at(imageType * -1)}: auto 1fr;
                 `
                     : ''
                 }
   
                 .image-item:first-child {
-                  grid-${GRID_TYPE.at(imageType * -1).replace(/s$/, '')}: 1 / ${thumbnailLength};
+                  grid-${GRID_TYPE.at(imageType - 1).replace(/s$/, '')}: 1 / ${thumbnailLength};
+                  ${GRID_TYPE.at(imageType) === 'rows' ? 'aspect-ratio: 16 / 9' : ''}
                 }
               }
             `}
