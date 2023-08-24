@@ -24,7 +24,27 @@ router.get('/', async (req, res, next) => {
         },
       ],
     });
-    res.status(200).json(feeds.map((feed) => processFeedPreview(feed.toJSON(), req?.user?.id)));
+    const feedWithReactions = await Promise.allSettled(
+      feeds.map(async (feed) => {
+        try {
+          const comments = await feed.getComments({
+            attributes: { exclude: ['feedId', 'userId'] },
+            include: [{ model: User, attributes: ['id', 'name', 'profileImage'] }],
+          });
+          return {
+            ...feed.toJSON(),
+            recentComments: comments.slice(0, 2),
+            reactions: {
+              comments: comments.length,
+            },
+          };
+        } catch (error) {
+          next(error);
+        }
+      })
+    );
+
+    res.status(200).json(feedWithReactions.map((response) => processFeedPreview(response.value, req?.user?.id)));
   } catch (error) {
     console.error(error);
     next(error);
