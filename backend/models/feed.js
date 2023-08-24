@@ -15,6 +15,7 @@ module.exports = (sequelize, DataTypes) => {
 
   Feed.associate = (models) => {
     Feed.hasMany(models.FeedImage, { foreignKey: 'feedId', sourceKey: 'id' });
+    Feed.hasMany(models.Comment, { foreignKey: 'feedId', sourceKey: 'id' });
     Feed.belongsTo(models.User, { foreignKey: 'userId', targetKey: 'id' });
   };
 

@@ -11,6 +11,7 @@ const sequelize = new Sequelize(config.database, config.username, config.passwor
 db.User = require('./user')(sequelize, Sequelize);
 db.Feed = require('./feed')(sequelize, Sequelize);
 db.FeedImage = require('./feedImage')(sequelize, Sequelize);
+db.Comment = require('./comment')(sequelize, Sequelize);
 
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
