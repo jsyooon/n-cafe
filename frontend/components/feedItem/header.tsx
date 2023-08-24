@@ -6,7 +6,7 @@ interface Props {
   data: Pick<FeedItem, 'id' | 'isMine' | 'writer' | 'createdAt'>;
 }
 
-export default function FeedHeader({ data }: Props) {
+export default function FeedItemHeader({ data }: Props) {
   return (
     <ArticleHeader writer={data.writer} createdAt={data.createdAt}>
       {data.isMine ? (

@@ -1,4 +1,4 @@
-import FeedHeader from '@/components/feedHeader';
+import FeedItemHeader from '@/components/feedItem/header';
 import type { PropsWithChildren } from 'react';
 import type { FeedItemCommon } from '@/types/feed';
 import styles from './styles.module.scss';
@@ -9,9 +9,9 @@ interface Props {
 
 export default function FeedItem({ data, children }: PropsWithChildren<Props>) {
   return (
-    <div className={styles.feedItem}>
-      <FeedHeader data={data} />
+    <article className={styles.feedItem}>
+      <FeedItemHeader data={data} />
       {children}
-    </div>
+    </article>
   );
 }
