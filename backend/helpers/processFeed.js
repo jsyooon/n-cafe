@@ -1,11 +1,11 @@
-const processFeed = ({ User, userId, FeedImages, ...rest }, reqUserId) => {
-  return {
-    ...rest,
-    isMine: reqUserId === userId,
-    images: FeedImages,
-    writer: User,
-  };
-};
+const isMine = (userId, reqUserId) => ({ isMine: userId === reqUserId });
+
+const processFeed = ({ User, userId, FeedImages, ...rest }, reqUserId) => ({
+  ...rest,
+  ...isMine(userId, reqUserId),
+  images: FeedImages,
+  writer: User,
+});
 
 const processFeedPreview = ({ content, ...feed }, reqUserId) => ({
   ...processFeed(feed, reqUserId),
@@ -13,6 +13,7 @@ const processFeedPreview = ({ content, ...feed }, reqUserId) => ({
 });
 
 module.exports = {
+  isMine,
   processFeedPreview,
   processFeed,
 };
