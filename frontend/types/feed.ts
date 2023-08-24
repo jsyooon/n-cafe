@@ -23,6 +23,9 @@ export interface FeedItemCommon {
   updatedAt: string;
   images?: FeedImageList;
   writer: WriterType;
+  reactions: {
+    comments: number;
+  };
 }
 
 export interface FeedItem extends FeedItemCommon {
@@ -31,6 +34,9 @@ export interface FeedItem extends FeedItemCommon {
 
 export interface FeedPreviewItem extends FeedItemCommon {
   summary: string;
+  recentComment: Array<CommentItem>;
 }
+
+export interface CommentItem extends Pick<FeedItem, 'id' | 'createdAt' | 'updatedAt' | 'images' | 'writer' | 'content'> {}
 
 export type FeedPreviewList = Array<FeedPreviewItem>;
