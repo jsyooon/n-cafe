@@ -7,16 +7,19 @@ import styles from './styles.module.scss';
 
 interface Props {
   writer: WriterType;
-  createdAt: string;
+  createdAt?: string;
+  className?: string;
 }
 
-export default function articleHeader({ writer, createdAt, children }: PropsWithChildren<Props>) {
+export default function articleHeader({ writer, createdAt, className, children }: PropsWithChildren<Props>) {
   return (
-    <header className={styles.articleHeader}>
+    <header className={[styles.articleHeader, className].join(' ')}>
       <Writer id={writer.id} name={writer.name} profileImage={writer.profileImage} />
-      <div className='date'>
-        <span>{new Intl.DateTimeFormat('ko-KR').format(new Date(createdAt))}</span>
-      </div>
+      {createdAt && (
+        <div className='date'>
+          <span>{new Intl.DateTimeFormat('ko-KR').format(new Date(createdAt))}</span>
+        </div>
+      )}
       <Dropdown className='util-wrap' inset='end'>
         <DropdownSelected>
           <FiMoreHorizontal size={18} />

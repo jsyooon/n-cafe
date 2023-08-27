@@ -8,7 +8,7 @@ interface Props {
 
 export default function FeedItemHeader({ data }: Props) {
   return (
-    <ArticleHeader writer={data.writer} createdAt={data.createdAt}>
+    <ArticleHeader writer={data.writer} createdAt={data.createdAt} className='feed-header'>
       {data.isMine ? (
         <>
           <Link href={`/write?feedId=${data.id}`}>수정</Link>
