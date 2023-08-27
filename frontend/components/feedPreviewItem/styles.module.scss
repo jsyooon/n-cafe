@@ -5,6 +5,7 @@
     .summary {
       line-height: 1.5em;
       max-height: 6em;
+      color: rgba(var(--black-color), 0.4);
       overflow: hidden;
     }
 
@@ -15,5 +16,32 @@
 
   + div {
     margin-top: 1.5em;
+  }
+}
+
+.commentCountButton {
+  display: inline-flex;
+  align-items: center;
+  font-size: inherit;
+
+  svg {
+    margin-inline-start: 0.3em;
+    fill: rgba(var(--black-color), 0.4);
+  }
+}
+
+.recentComments {
+  padding-top: 0.8em;
+
+  &:not(:first-child) {
+    margin-top: 0.8em;
+  }
+
+  :global {
+    .comment-content {
+      color: rgba(var(--black-color), 0.4);
+      font-size: 0.9em;
+      margin-top: 0.2em;
+    }
   }
 }

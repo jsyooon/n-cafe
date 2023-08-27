@@ -3,7 +3,9 @@ import FeedItem from '@/components/feedItem';
 import FeedImages from '@/components/feedImages';
 import FeedContent from '@/components/feedItem/content';
 import CommentCount from '@/components/feedItem/commentCount';
+import CommentList from '@/components/feedItem/commentList';
 import FeedFooter from '@/components/feedItem/footer';
+import RecentComments from '@/components/feedPreviewItem/recentComments';
 import { VscChevronDown } from 'react-icons/vsc';
 import { useFeedItemQuery } from '@/queries/useFeedQuery';
 import type { FeedPreviewItem } from '@/types/feed';
@@ -19,6 +21,8 @@ export default function FeedPreviewItem({ data }: Props) {
   const summary = useRef<HTMLDivElement>();
 
   const { data: feedItemData } = useFeedItemQuery(data.id, { enabled: loadFeedItem });
+
+  const getComment = () => {};
 
   useEffect(() => {
     if (summary.current) setMore(summary.current.offsetHeight < summary.current.scrollHeight);
@@ -38,11 +42,16 @@ export default function FeedPreviewItem({ data }: Props) {
         </>
       )}
       <FeedFooter>
-        <button type='button' className={styles.commentCountButton}>
+        <button type='button' className={styles.commentCountButton} onClick={getComment}>
           <CommentCount count={data.reactions.comments} />
           {data.reactions.comments > 0 && <VscChevronDown size={16} />}
         </button>
       </FeedFooter>
+      {data.recentComments.length > 0 && (
+        <CommentList>
+          <RecentComments data={data.recentComments} />
+        </CommentList>
+      )}
     </FeedItem>
   );
 }

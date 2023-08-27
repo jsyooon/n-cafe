@@ -25,3 +25,11 @@
     margin-inline-start: 0.3em;
   }
 }
+
+.commentsList {
+  margin-top: 0.8em;
+
+  > div {
+    border-top: 1px solid rgba(var(--black-color), 0.1);
+  }
+}

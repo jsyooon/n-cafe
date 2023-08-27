@@ -34,7 +34,7 @@ export interface FeedItem extends FeedItemCommon {
 
 export interface FeedPreviewItem extends FeedItemCommon {
   summary: string;
-  recentComment: Array<CommentItem>;
+  recentComments: Array<CommentItem>;
 }
 
 export interface CommentItem extends Pick<FeedItem, 'id' | 'createdAt' | 'updatedAt' | 'images' | 'writer' | 'content'> {}
