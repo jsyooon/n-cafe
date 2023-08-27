@@ -89,8 +89,7 @@ router.put('/:id', async (req, res, next) => {
       }
     };
 
-    const response = await Promise.allSettled([updateFeed(), updateImages()]);
-    console.log(response);
+    await Promise.allSettled([updateFeed(), updateImages()]);
     return res.status(200).send('OK');
   } catch (error) {
     console.error(error);
@@ -113,6 +112,7 @@ router.get('/:id', async (req, res, next) => {
           attributes: ['url', 'width', 'height'],
         },
       ],
+      attributes: { exclude: ['userId'] },
     });
 
     return res.status(200).json(processFeed(feed.toJSON(), req?.user?.id));

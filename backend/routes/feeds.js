@@ -1,7 +1,7 @@
 const express = require('express');
 const { Feed, User } = require('../models');
 const { FeedImage } = require('../models');
-const { processFeedPreview } = require('../helpers/processArticle');
+const { processFeedPreview, processComment } = require('../helpers/processArticle');
 const router = express.Router();
 
 router.get('/', async (req, res, next) => {
@@ -23,7 +23,9 @@ router.get('/', async (req, res, next) => {
           attributes: ['id', 'name', 'profileImage'],
         },
       ],
+      attributes: { exclude: ['userId'] },
     });
+
     const feedWithReactions = await Promise.allSettled(
       feeds.map(async (feed) => {
         try {
@@ -33,7 +35,7 @@ router.get('/', async (req, res, next) => {
           });
           return {
             ...feed.toJSON(),
-            recentComments: comments.slice(0, 2),
+            recentComments: comments.slice(0, 2).map((comment) => processComment(comment.toJSON())),
             reactions: {
               comments: comments.length,
             },
