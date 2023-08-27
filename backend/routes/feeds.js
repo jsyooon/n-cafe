@@ -1,7 +1,7 @@
 const express = require('express');
 const { Feed, User } = require('../models');
 const { FeedImage } = require('../models');
-const { processFeedPreview } = require('../helpers/processFeed');
+const { processFeedPreview } = require('../helpers/processArticle');
 const router = express.Router();
 
 router.get('/', async (req, res, next) => {

@@ -2,7 +2,7 @@ const express = require('express');
 const { isAuth } = require('./middlewares');
 const { Feed, User } = require('../models');
 const { FeedImage } = require('../models');
-const { processFeed } = require('../helpers/processFeed');
+const { processFeed } = require('../helpers/processArticle');
 const router = express.Router();
 
 router.post('/', isAuth, async (req, res, next) => {

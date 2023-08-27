@@ -2,6 +2,9 @@ import { useEffect, useRef, useState } from 'react';
 import FeedItem from '@/components/feedItem';
 import FeedImages from '@/components/feedImages';
 import FeedContent from '@/components/feedItem/content';
+import CommentCount from '@/components/feedItem/commentCount';
+import FeedFooter from '@/components/feedItem/footer';
+import { VscChevronDown } from 'react-icons/vsc';
 import { useFeedItemQuery } from '@/queries/useFeedQuery';
 import type { FeedPreviewItem } from '@/types/feed';
 import styles from './styles.module.scss';
@@ -34,6 +37,12 @@ export default function FeedPreviewItem({ data }: Props) {
           {data.images?.length > 0 && <FeedImages images={data.images} />}
         </>
       )}
+      <FeedFooter>
+        <button type='button' className={styles.commentCountButton}>
+          <CommentCount count={data.reactions.comments} />
+          {data.reactions.comments > 0 && <VscChevronDown size={16} />}
+        </button>
+      </FeedFooter>
     </FeedItem>
   );
 }
