@@ -35,7 +35,7 @@ router.get('/', async (req, res, next) => {
           });
           return {
             ...feed.toJSON(),
-            recentComments: comments.slice(0, 2).map((comment) => processComment(comment.toJSON())),
+            recentComments: comments.slice(0, 2).map((comment) => processComment(comment.toJSON(), { reqUserId: req.user?.id, feedWriterId: feed.User.id })),
             reactions: {
               comments: comments.length,
             },
@@ -46,7 +46,7 @@ router.get('/', async (req, res, next) => {
       })
     );
 
-    res.status(200).json(feedWithReactions.map((response) => processFeedPreview(response.value, req?.user?.id)));
+    res.status(200).json(feedWithReactions.map((response) => processFeedPreview(response.value, req.user?.id)));
   } catch (error) {
     console.error(error);
     next(error);

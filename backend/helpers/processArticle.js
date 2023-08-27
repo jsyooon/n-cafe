@@ -1,8 +1,9 @@
 const isMine = (userId, reqUserId) => ({ isMine: userId === reqUserId });
 
-const processComment = ({ User, ...rest }, reqUserId) => ({
+const processComment = ({ User, ...rest }, { reqUserId, feedWriterId }) => ({
   ...rest,
   writer: User,
+  isArticleWriter: User.id === feedWriterId,
   ...isMine(User.id, reqUserId),
 });
 
