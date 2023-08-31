@@ -1,7 +1,6 @@
 const express = require('express');
 const { isAuth } = require('./middlewares');
-const { Feed, User } = require('../models');
-const { FeedImage } = require('../models');
+const { Feed, User, FeedImage, FeedRating } = require('../models');
 const { processFeed } = require('../helpers/processArticle');
 const router = express.Router();
 
@@ -116,6 +115,35 @@ router.get('/:id', async (req, res, next) => {
     });
 
     return res.status(200).json(processFeed(feed.toJSON(), req?.user?.id));
+  } catch (error) {
+    console.error(error);
+    next(error);
+  }
+});
+
+router.post('/:id/upDown', isAuth, async (req, res, next) => {
+  try {
+    const rating = req.body.rating;
+    if (Math.abs(rating) !== 1) return res.status(400).send('Up/Down 정보가 없습니다.');
+
+    const data = await FeedRating.findOrCreate({
+      where: { userId: req.user.id, feedId: req.params.id },
+      defaults: { rating },
+    });
+    if (data.rating !== rating) return res.status(409).send('이미 Up/Down에 참여하였습니다.');
+    return res.status(201).send('OK');
+  } catch (error) {
+    console.error(error);
+    next(error);
+  }
+});
+
+router.delete('/:id/upDown', isAuth, async (req, res, next) => {
+  try {
+    await FeedRating.destroy({
+      where: { userId: req.user.id, feedId: req.params.id },
+    });
+    return res.status(200).send('OK');
   } catch (error) {
     console.error(error);
     next(error);
