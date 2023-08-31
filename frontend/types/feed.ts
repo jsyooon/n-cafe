@@ -16,6 +16,11 @@ export interface WriterType {
   profileImage: string;
 }
 
+export interface UpdownReactions {
+  up: number;
+  down: number;
+}
+
 export interface FeedItemCommon {
   id: number;
   isMine: boolean;
@@ -25,7 +30,9 @@ export interface FeedItemCommon {
   writer: WriterType;
   reactions: {
     comments: number;
-  };
+    up: number;
+    down: number;
+  } & UpdownReactions;
 }
 
 export interface FeedItem extends FeedItemCommon {
@@ -40,3 +47,5 @@ export interface FeedPreviewItem extends FeedItemCommon {
 export interface CommentItem extends Pick<FeedItem, 'id' | 'createdAt' | 'updatedAt' | 'images' | 'writer' | 'content'> {}
 
 export type FeedPreviewList = Array<FeedPreviewItem>;
+
+export type UpDownType = 1 | -1;
