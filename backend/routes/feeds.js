@@ -33,11 +33,15 @@ router.get('/', async (req, res, next) => {
             attributes: { exclude: ['feedId', 'userId'] },
             include: [{ model: User, attributes: ['id', 'name', 'profileImage'] }],
           });
+
+          const updown = await feed.getFeedRatings();
           return {
             ...feed.toJSON(),
             recentComments: comments.slice(0, 2).map((comment) => processComment(comment.toJSON(), { reqUserId: req.user?.id, feedWriterId: feed.User.id })),
             reactions: {
               comments: comments.length,
+              up: updown.filter(({ rating }) => rating === 1).length,
+              down: updown.filter(({ rating }) => rating === -1).length,
             },
           };
         } catch (error) {
