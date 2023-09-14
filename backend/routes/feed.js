@@ -121,16 +121,16 @@ router.get('/:id', async (req, res, next) => {
   }
 });
 
-router.post('/:id/upDown', isAuth, async (req, res, next) => {
+router.post('/:id/rating', isAuth, async (req, res, next) => {
   try {
-    const rating = req.body.rating;
+    const rating = req.body;
     if (Math.abs(rating) !== 1) return res.status(400).send('Up/Down 정보가 없습니다.');
 
-    const data = await FeedRating.findOrCreate({
+    const [data, created] = await FeedRating.findOrCreate({
       where: { userId: req.user.id, feedId: req.params.id },
       defaults: { rating },
     });
-    if (data.rating !== rating) return res.status(409).send('이미 Up/Down에 참여하였습니다.');
+    if (!created) return res.status(409).send('이미 Up/Down에 참여하였습니다.');
     return res.status(201).send('OK');
   } catch (error) {
     console.error(error);
@@ -138,7 +138,7 @@ router.post('/:id/upDown', isAuth, async (req, res, next) => {
   }
 });
 
-router.delete('/:id/upDown', isAuth, async (req, res, next) => {
+router.delete('/:id/rating', isAuth, async (req, res, next) => {
   try {
     await FeedRating.destroy({
       where: { userId: req.user.id, feedId: req.params.id },
