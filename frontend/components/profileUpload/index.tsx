@@ -3,7 +3,7 @@
 import { useMutation } from '@tanstack/react-query';
 import ImageUpload from '@/components/imageUpload';
 import ProfileImage from '@/components/profileImage';
-import { fetchPost } from '@/helpers/fetch';
+import { fetchPost } from '@/helpers/fetcher';
 import styles from './style.module.scss';
 
 interface Props {

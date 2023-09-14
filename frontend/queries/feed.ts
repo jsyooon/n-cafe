@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
-import { fetcher } from '@/helpers/fetch';
+import { fetcher } from '@/helpers/fetcher';
 import type { UseQueryOptions } from '@tanstack/react-query';
-import type { CookieItemType } from '@/types/fetch';
+import type { CookieItemType } from '@/types/fetcher';
 import type { FeedItem, FeedPreviewList } from '@/types/feed';
 
 /* Feed List */

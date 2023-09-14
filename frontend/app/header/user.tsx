@@ -5,7 +5,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import ProfileImage from '@/components/profileImage';
 import { Dropdown, DropdownSelected, DropdownList } from '@/components/dropdown';
 import { USER_QUERY_KEY } from '@/queries/user';
-import { fetchPost } from '@/helpers/fetch';
+import { fetchPost } from '@/helpers/fetcher';
 import { LuEdit3 } from 'react-icons/lu';
 import type { UserType } from '@/types/user';
 import styles from './style.module.scss';

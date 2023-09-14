@@ -1,4 +1,4 @@
-import type { FetchOptionType, ResponseType, CookieItemType } from '@/types/fetch';
+import type { FetchOptionType, ResponseType, CookieItemType } from '@/types/fetcher';
 import FetchError from '@/helpers/FetchError';
 
 const API_DOMAIN = 'http://localhost:3100';
@@ -59,19 +59,15 @@ const defaultParams = {
 } as const;
 
 const fetchCommon = async <T>(url: string, options?: RequestInit) => {
-  try {
-    const response = await fetch(new URL(url, API_DOMAIN), {
-      ...defaultParams,
-      ...options,
-    });
-    if (!response.ok) {
-      const message = await response.text();
-      throw new FetchError({ status: response.status, message });
-    }
-    return getResponse<T>(response);
-  } catch (error) {
-    console.error(error);
+  const response = await fetch(new URL(url, API_DOMAIN), {
+    ...defaultParams,
+    ...options,
+  });
+  if (!response.ok) {
+    const message = await response.text();
+    throw new FetchError({ status: response.status, message });
   }
+  return getResponse<T>(response);
 };
 
 export const fetchGet = <T = string>(url: string, options?: FetchOptionType) => {

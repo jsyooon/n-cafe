@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
-import { fetchGet } from '@/helpers/fetch';
+import { fetchGet } from '@/helpers/fetcher';
 import Form from './form';
 import type { UserType } from '@/types/user';
 
