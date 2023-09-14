@@ -1,6 +1,6 @@
 import UpDownButton from '@/components/upDownButton';
 import { useMutation } from '@tanstack/react-query';
-import { fetcher } from '@/helpers/fetch';
+import { fetcher } from '@/helpers/fetcher';
 import type { FeedItem, ReactionStatus, UpDownType, UpdownReactions } from '@/types/feed';
 
 interface Props {

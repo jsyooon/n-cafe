@@ -1,4 +1,4 @@
-import type { ResponseType } from '@/types/fetch';
+import type { ResponseType } from '@/types/fetcher';
 
 type ParameterType = Pick<ResponseType, 'status'> & { message: string };
 

@@ -1,7 +1,7 @@
-import { fetchGet } from '@/helpers/fetch';
+import { fetchGet } from '@/helpers/fetcher';
 import { useQuery } from '@tanstack/react-query';
 import type { UserType } from '@/types/user';
-import { type CookieItemType } from '@/types/fetch';
+import { type CookieItemType } from '@/types/fetcher';
 
 export const USER_QUERY_KEY = ['user'] as const;
 

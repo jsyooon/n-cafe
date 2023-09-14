@@ -4,7 +4,7 @@ import { useRef, useEffect, useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import Button from '@/components/button';
 import ImageUpload from '@/components/imageUpload';
-import { fetchPost } from '@/helpers/fetch';
+import { fetchPost } from '@/helpers/fetcher';
 import type { FeedImageList, FeedImage, FeedPayloadType } from '@/types/feed';
 import styles from './style.module.scss';
 
@@ -22,7 +22,9 @@ export default function Textarea({ placeholder, initialContent, onSubmit }: Prop
   const [selectRange, setSelectRange] = useState<Range>();
 
   const onClickSubmit = () => {
-    const attatchedImages = Array.from(textarea.current.querySelectorAll('img')).map<FeedImage>((element: HTMLImageElement) => ({ url: element.src }));
+    const attatchedImages = Array.from(textarea.current.querySelectorAll('img')).map<FeedImage>((element: HTMLImageElement) => ({
+      url: element.src,
+    }));
 
     onSubmit({ images: attatchedImages?.length ? attatchedImages : uploadImages, content: textarea.current.innerHTML });
   };

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useCallback, useRef } from 'react';
-import { fetchGet } from '@/helpers/fetch';
+import { fetchGet } from '@/helpers/fetcher';
 import ProfileUpload from '@/components/profileUpload';
 import InputText from '@/components/inputText';
 import Button from '@/components/button';
