@@ -35,13 +35,21 @@ router.get('/', async (req, res, next) => {
           });
 
           const updown = await feed.getFeedRatings();
+          const myUpdownStatus = updown.find(({ userId }) => userId === req?.user?.id)?.rating ?? 0;
+
           return {
             ...feed.toJSON(),
-            recentComments: comments.slice(0, 2).map((comment) => processComment(comment.toJSON(), { reqUserId: req.user?.id, feedWriterId: feed.User.id })),
+            recentComments: comments
+              .slice(0, 2)
+              .map((comment) => processComment(comment.toJSON(), { reqUserId: req.user?.id, feedWriterId: feed.User.id })),
             reactions: {
               comments: comments.length,
               up: updown.filter(({ rating }) => rating === 1).length,
               down: updown.filter(({ rating }) => rating === -1).length,
+            },
+            reactionStatus: {
+              up: myUpdownStatus === 1,
+              down: myUpdownStatus === -1,
             },
           };
         } catch (error) {
