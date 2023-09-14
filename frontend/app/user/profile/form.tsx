@@ -3,7 +3,7 @@
 import { redirect } from 'next/navigation';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import UserInfoForm from '@/components/userInfoForm';
-import { useUserQuery, USER_QUERY_KEY } from '@/queries/useUserQuery';
+import { useUserQuery, USER_QUERY_KEY } from '@/queries/user';
 import useToast from '@/hooks/useToast';
 import { fetchPut } from '@/helpers/fetch';
 import type { UserType } from '@/types/user';

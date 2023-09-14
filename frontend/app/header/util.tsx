@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { AiOutlineUser } from 'react-icons/ai';
-import { useUserQuery } from '@/queries/useUserQuery';
+import { useUserQuery } from '@/queries/user';
 import User from './user';
 import styles from './style.module.scss';
 

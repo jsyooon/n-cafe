@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import UserInfoForm from '@/components/userInfoForm';
 import { fetchPost } from '@/helpers/fetch';
-import { USER_QUERY_KEY } from '@/queries/useUserQuery';
+import { USER_QUERY_KEY } from '@/queries/user';
 import type { UserType } from '@/types/user';
 
 interface Props {
