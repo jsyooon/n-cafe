@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import type { MutableRefObject } from 'react';
 
-export default function userOutSideClick(ref: MutableRefObject<Element>) {
+export default function useOutsideClick(ref: MutableRefObject<Element>) {
   const [outsideClick, setOutSideClick] = useState(false);
 
   useEffect(() => {
