@@ -6,8 +6,9 @@ import CommentCount from '@/components/feedItem/commentCount';
 import CommentList from '@/components/feedItem/commentList';
 import FeedFooter from '@/components/feedItem/footer';
 import RecentComments from '@/components/feedPreviewItem/recentComments';
+import UpDownButton from '@/components/feedPreviewItem/upDownButton';
 import { VscChevronDown } from 'react-icons/vsc';
-import { useFeedItemQuery } from '@/queries/useFeedQuery';
+import { useFeedItemQuery } from '@/queries/feed';
 import type { FeedPreviewItem } from '@/types/feed';
 import styles from './styles.module.scss';
 
@@ -46,6 +47,7 @@ export default function FeedPreviewItem({ data }: Props) {
           <CommentCount count={data.reactions.comments} />
           {data.reactions.comments > 0 && <VscChevronDown size={16} />}
         </button>
+        <UpDownButton data={data} />
       </FeedFooter>
       {data.recentComments.length > 0 && (
         <CommentList>

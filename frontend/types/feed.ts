@@ -21,6 +21,11 @@ export interface UpdownReactions {
   down: number;
 }
 
+export interface ReactionStatus {
+  up: boolean;
+  down: boolean;
+}
+
 export interface FeedItemCommon {
   id: number;
   isMine: boolean;
@@ -30,9 +35,8 @@ export interface FeedItemCommon {
   writer: WriterType;
   reactions: {
     comments: number;
-    up: number;
-    down: number;
   } & UpdownReactions;
+  reactionStatus: ReactionStatus;
 }
 
 export interface FeedItem extends FeedItemCommon {
