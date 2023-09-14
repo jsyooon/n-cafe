@@ -45,3 +45,32 @@
     }
   }
 }
+
+.upDownButton {
+  margin-inline-start: auto;
+
+  :global {
+    button {
+      &:hover {
+        .icon {
+          background-color: rgba(var(--black-color), 0.05);
+        }
+      }
+      &:not(:first-child) {
+        margin-inline-start: 0.8em;
+      }
+
+      .icon {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 26px;
+        height: 26px;
+      }
+
+      .text {
+        margin-inline-start: 0.2em;
+      }
+    }
+  }
+}

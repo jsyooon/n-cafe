@@ -1,0 +1,23 @@
+.buttonWrap {
+  display: flex;
+  align-items: center;
+
+  :global {
+    button {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      fill: rgba(var(--black-color), 0.4);
+      color: rgba(var(--black-color), 0.5);
+
+      svg {
+        position: relative;
+      }
+
+      &.is-active {
+        fill: rgba(var(--point-color));
+        color: rgba(var(--point-color));
+      }
+    }
+  }
+}
