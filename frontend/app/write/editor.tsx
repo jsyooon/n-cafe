@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import TextareaComponent from '@/components/textarea';
 import { fetchGet, fetcher } from '@/helpers/fetch';
-import { getFeedItemQueryKey, useFeedItemQuery } from '@/queries/useFeedQuery';
+import { getFeedItemQueryKey, useFeedItemQuery } from '@/queries/feed';
 import type { FeedImage, FeedItem, FeedPayloadType } from '@/types/feed';
 import styles from './style.module.scss';
 
